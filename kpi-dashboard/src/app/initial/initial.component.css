@@ -1,0 +1,28 @@
+.content{
+  padding-top:3em;
+  text-align: center;
+}
+h1{
+  font-size:40px;
+  font-weight: bold;
+}
+.questions{
+  padding-top: 2em;
+}
+.example-card {
+  box-shadow: 0 4px 2px -2px gray !important;
+}
+mat-card{
+  max-width: 600px;
+  box-shadow: 0 4px 2px -2px gray !important;
+}
+mat-card-header{
+  font-size:30px;
+}
+mat-card-content{
+  font-size:20px;
+  text-align: left;
+}
+img{
+  width:300px;
+}
