@@ -1,5 +1,5 @@
 .content{
-  padding-top:3em;
+  padding-top:7em;
   text-align: center;
 }
 h1{
@@ -15,6 +15,8 @@ h1{
 mat-card{
   max-width: 600px;
   box-shadow: 0 4px 2px -2px gray !important;
+  background-color: #673ab7;
+  height:150px;
 }
 mat-card-header{
   font-size:30px;
@@ -23,6 +25,15 @@ mat-card-content{
   font-size:20px;
   text-align: left;
 }
+mat-card-content p{
+  color:white;
+}
+mat-card-title{
+  color:white;
+}
 img{
   width:300px;
+}
+mat-icon{
+  padding-right: 1em;
 }

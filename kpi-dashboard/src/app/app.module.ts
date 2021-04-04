@@ -10,12 +10,17 @@ import { NavbarComponent } from './navigation/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card'; 
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DashboardCatalogueComponent } from './dashboard-catalogue/dashboard-catalogue.component';
+import { AboutComponent } from './about/about.component'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 @NgModule({
   declarations: [
     AppComponent,
     InitialComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardCatalogueComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTooltipModule
 
   ],
   providers: [],
