@@ -18,12 +18,15 @@ mat-card{
   background-color: #673ab7;
   height:150px;
 }
+mat-card:hover{
+  background-color: darkviolet ;
+}
 mat-card-header{
   font-size:30px;
 }
 mat-card-content{
   font-size:20px;
-  text-align: left;
+  text-align: justify;
 }
 mat-card-content p{
   color:white;
@@ -36,4 +39,14 @@ img{
 }
 mat-icon{
   padding-right: 1em;
+}
+.check{
+  float:right;
+  font-size: 14px;
+  margin-bottom: 15px !important;
+  height: 30px;
+  font-weight: bold;
+}
+.check:hover{
+  background-color: lightsalmon;
 }

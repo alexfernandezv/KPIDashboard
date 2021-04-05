@@ -1,0 +1,21 @@
+.column1 {
+  float: left;
+  width: 50%;
+  height: 500px; /* Should be removed. Only for demonstration */
+  border-right: 1px solid black;
+}
+.column2 {
+  float: right;
+  width: 45%;
+  height: 100%; /* Should be removed. Only for demonstration */
+  
+}
+
+h2{
+  font-size: 30px;
+  font-weight: bold;
+}
+p{
+  font-size:16px;
+  padding-top: 30px;
+}

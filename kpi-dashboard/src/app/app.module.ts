@@ -14,6 +14,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { DashboardCatalogueComponent } from './dashboard-catalogue/dashboard-catalogue.component';
 import { AboutComponent } from './about/about.component'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTabsModule
 
   ],
   providers: [],
