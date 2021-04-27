@@ -1,55 +1,97 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <h1>Welcome to the KPI Dashboard!</h1>
-  <img src="assets/images/dashboard-logo.png">
-  <mat-grid-list cols="2" rowHeight="3:1">
-    <mat-grid-tile>
-      <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title><mat-icon>question_answer</mat-icon>What is it?</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          KPI Dashboard is a web application tool that allows Scrum Members (specifically Scrum Masters) to track, check and analyze how the project in progress is going through user-friendly Dashboards.
+  <div class="first-container">
+    <img class="initial" src="assets/images/dashboard-logo.png">
+    <div class="titles">
+      <h1 class="title">Welcome to the</h1> <br/><h1 class="title">KPI Dashboard!</h1> 
+      <h2 class="subtitle">Start tracking your project metrics!</h2>
+    </div>
+  </div>
+  <div class="second-container">
+    <div class="second-container-2">
+      <img src="assets/images/kpi-dashboard.png">
+      <h2>What is a KPI Dashboard?</h2>
+      <div class="explanation">
+        <p>KPI Dashboard is a web application tool that allows Scrum Members (specifically Scrum Masters) to track, check and analyze how the project in progress is going through user-friendly Dashboards. 
         </p>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-    <mat-grid-tile><mat-card>
-      <mat-card-header>
-        <mat-card-title><mat-icon>question_answer</mat-icon>How is it done?</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          Through Key Performance Indicators (KPI). KPIs are metrics and indicators that give information about an specific key-factor in project developing. This application is KPI Scrum Metrics oriented, due to it's capacity in tracking and measuring Scrum development metrics.
-        </p>
-      </mat-card-content>
-    </mat-card></mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card>
+        <button mat-stroked-button color="primary">Learn More</button>
+      </div>
+      
+
+      
+    </div>
+      
+  </div>
+  <div class="second-container-3">
+    <h2>FaQ</h2>
+    <mat-grid-list cols="3" rowHeigt="3:1">
+      <mat-grid-tile>
+        <p><strong>How is it done?</strong><br/> <br/>Through Key Performance Indicators (KPI). KPIs are metrics and indicators that give information about an specific key-factor in project developing. This application is KPI Scrum Metrics oriented, due to it's capacity in tracking and measuring Scrum development metrics.</p> 
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p><strong>How many KPIs are tracked?</strong><br/> <br/>Over 10. They are carefully accurate and under analysis. We have decided to divide them into categories according to what they measure and to have data more organised.</p> 
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p><strong>The categories</strong><br/><br/>We classified similar KPIs into Dashboards, making a total of 4 Dashboards. The Scrum Team Management Dashboard, the Sprint Management Dashboard, the Efectiveness Management Dashboard and the Bug Management Dashboard</p> 
+      </mat-grid-tile>
+    </mat-grid-list>
+    <!-- <span>
+      <h3>How is it done?</h3>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p> 
+    </span> -->
+   
+  
+  </div>
+  
+    
+    <!-- <mat-grid-list cols="2" rowHeight="3:1">
+      <mat-grid-tile>
+        <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><mat-icon>question_answer</mat-icon>How many KPIs are tracked?</mat-card-title>
+          <mat-card-title><mat-icon>question_answer</mat-icon>What is it?</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>
-            Over 10. They are carefully accurate and under analysis. We have decided to divide them into categories according to what they measure and to have data more organised.
+            KPI Dashboard is a web application tool that allows Scrum Members (specifically Scrum Masters) to track, check and analyze how the project in progress is going through user-friendly Dashboards.
           </p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card>
+      <mat-grid-tile><mat-card>
         <mat-card-header>
-          <mat-card-title><mat-icon>category</mat-icon>The Dashboard categories</mat-card-title>
+          <mat-card-title><mat-icon>question_answer</mat-icon>How is it done?</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>
-            We classified similar KPIs into Dashboards, making a total of 4 Dashboards. The Scrum Team Management Dashboard, the Sprint Management Dashboard, the Efectiveness Management Dashboard and the Bug Management Dashboard
+            Through Key Performance Indicators (KPI). KPIs are metrics and indicators that give information about an specific key-factor in project developing. This application is KPI Scrum Metrics oriented, due to it's capacity in tracking and measuring Scrum development metrics.
           </p>
-          <a class="check"  [routerLink]="['/dashboard-catalogue']" mat-raised-button>Check Them</a>
         </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+      </mat-card></mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title><mat-icon>question_answer</mat-icon>How many KPIs are tracked?</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Over 10. They are carefully accurate and under analysis. We have decided to divide them into categories according to what they measure and to have data more organised.
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title><mat-icon>category</mat-icon>The Dashboard categories</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              We classified similar KPIs into Dashboards, making a total of 4 Dashboards. The Scrum Team Management Dashboard, the Sprint Management Dashboard, the Efectiveness Management Dashboard and the Bug Management Dashboard
+            </p>
+            <a class="check"  [routerLink]="['/dashboard-catalogue']" mat-raised-button>Check Them</a>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list> -->
   
 </div>

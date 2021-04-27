@@ -3,9 +3,9 @@
   position: fixed;
 }
 
-a{
-  padding-right: 1em;
-  font-size: 22px;
+.nav a{
+  margin-right: 6em;
+  font-size: 18px;
   
 }
 a:hover{
