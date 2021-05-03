@@ -5,7 +5,10 @@
    <a mat-button [routerLink]="['/dashboard-catalogue']" routerLinkActive="active-link">Dashboards</a>
    <a mat-button [routerLink]="['/about']" routerLinkActive="active-link">About</a>
   </div>
-  <div>
-    <a mat-raised-button [routerLink]="['login']" routerLinkActive="active-link">Login</a>
+  <div *ngIf="!isLogged">
+    <a mat-raised-button [routerLink]="['/login']" routerLinkActive="active-link">Login</a>
+  </div>
+  <div *ngIf="isLogged">
+    <a mat-raised-button (click)="logOut()" [routerLink]="['']" routerLinkActive="active-link">Logout</a>
   </div>
 </mat-toolbar>

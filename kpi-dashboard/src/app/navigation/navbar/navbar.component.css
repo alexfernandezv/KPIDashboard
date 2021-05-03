@@ -1,6 +1,7 @@
 .navbar{
   justify-content: space-between;
   position: fixed;
+  z-index: 1000;
 }
 
 .nav a{

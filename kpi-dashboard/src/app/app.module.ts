@@ -14,14 +14,20 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { DashboardCatalogueComponent } from './dashboard-catalogue/dashboard-catalogue.component';
 import { AboutComponent } from './about/about.component'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTabsModule} from '@angular/material/tabs';
+import { LoginComponent } from './login/login.component'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
     InitialComponent,
     NavbarComponent,
     DashboardCatalogueComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,10 +39,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatGridListModule,
     MatTooltipModule,
-    MatTabsModule
-
+    MatTabsModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
