@@ -1,6 +1,14 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div class="row">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="5">
+      <img src="assets/images/tfg-schema.png">
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <!-- <div class="row">
     <div class="column1">
       <h2>ABOUT ME</h2>
       <p>I am Alex Fernandez Valladares. </p>
@@ -14,7 +22,7 @@
       <p>The main aim of the project is to build a KPI Dashboard from an existent Jira Scrum Board</p>
       <p>The amount of developing time of this project goes from mid of February to the end of June </p>
       <p>Extracting the data from the Jira Board through its API and store it in a DataBase is part of another TFG proposal which is complemented by this project</p>
-      <img src="assets/images/tfg-schema.png">
+      
     </div>
-  </div>
+  </div> -->
 </div>

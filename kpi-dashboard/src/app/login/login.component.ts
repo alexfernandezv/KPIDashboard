@@ -11,9 +11,10 @@ import {  MatSnackBar} from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({});
-  loading = false;
-  submitted = false;
+  public loginInvalid = false;
+  private formSubmitAttempt = false;
   returnUrl: string = '';
+  get f() { return this.loginForm.controls; }
 
   constructor(
       private formBuilder: FormBuilder,
@@ -31,14 +32,16 @@ export class LoginComponent implements OnInit {
   }
 
   
-  get f() { return this.loginForm.controls; }
+  
+
   onSubmit() {
-      this.submitted = true;
-      this.loading = true;
+    this.loginInvalid = false;
+    this.formSubmitAttempt = false;
+    if (this.loginForm.valid) {
       const user={email: this.loginForm.controls['username'].value, password: this.loginForm.controls['password'].value }
       this.userService.login(user).subscribe(data => {
         this.userService.setToken(data.token);
-        this._snackBar.open("Login successful", "", {
+        this._snackBar.open("Logged in successfully", "", {
           duration: 3000
         });
         this.router.navigate([''])
@@ -46,10 +49,9 @@ export class LoginComponent implements OnInit {
         this._snackBar.open("Wrong credentials. Try again", "", {
           duration: 3000
         });
+        this.loginInvalid = true;
       });
+    }
   }
-}
-function first(): any {
-  throw new Error('Function not implemented.');
 }
 
