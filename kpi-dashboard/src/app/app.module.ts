@@ -21,6 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
+import { NtkmeButtonModule } from '@ctrl/ngx-github-buttons';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    NtkmeButtonModule
   ],
   providers: [CookieService, MatSnackBar],
   bootstrap: [AppComponent]

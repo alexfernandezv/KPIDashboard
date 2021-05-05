@@ -1,21 +1,27 @@
-.column1 {
-  float: left;
-  width: 50%;
-  height: 500px; /* Should be removed. Only for demonstration */
-  border-right: 1px solid black;
-}
-.column2 {
-  float: right;
-  width: 45%;
-  height: 100%; /* Should be removed. Only for demonstration */
+p{
+  text-align: left;
+  margin-left: 80px;
+  margin-bottom: 20px;
+  font-size: 17px;
   
 }
-
+div{
+  margin-right: 20px;
+}
+.project p{
+  width: 70%;
+}
+.me p{
+  width: 80%;
+}
+.contact{
+  margin-bottom: 15px;
+  display:inline-block;
+}
 h2{
-  font-size: 30px;
   font-weight: bold;
 }
-p{
-  font-size:16px;
-  padding-top: 30px;
+.github{
+  display: inline-block;
+  margin-left: 10px;
 }
