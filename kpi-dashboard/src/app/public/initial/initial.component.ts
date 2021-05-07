@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/users';
 import { UsersService } from '../../services/users/users.service';
 
 @Component({
@@ -7,11 +8,12 @@ import { UsersService } from '../../services/users/users.service';
   styleUrls: ['./initial.component.css']
 })
 export class InitialComponent implements OnInit {
-  isLogged: boolean;
-  constructor(private usersService: UsersService) { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    
+    if(this.authService.isUserLogged()){
+      this.authService.logout()
+    }
   }
 
 }

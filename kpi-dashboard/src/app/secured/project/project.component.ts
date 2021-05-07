@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -11,7 +12,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 export class ProjectComponent implements OnInit {
 
   users: User[] = [];
-
+  date1 = new FormControl(new Date())
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
@@ -21,6 +22,7 @@ export class ProjectComponent implements OnInit {
           .subscribe(users => {
               this.users = users;
           });
+      
   }
 
 }

@@ -25,10 +25,11 @@ import { ProjectComponent } from './secured/project/project.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { fakeBackendProvider } from './helpers/fake-backend';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
 import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService, UsersService } from './services/users/index';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,8 @@ import { AuthenticationService, UsersService } from './services/users/index';
     MatTabsModule, 
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
