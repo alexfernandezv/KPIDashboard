@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-initial',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./initial.component.css']
 })
 export class InitialComponent implements OnInit {
-
-  constructor() { }
+  isLogged: boolean;
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    
   }
 
 }

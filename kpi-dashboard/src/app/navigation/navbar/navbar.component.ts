@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { UsersService } from '../../users/users.service';
+import { AuthenticationService } from 'src/app/services/users/authentication.service';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +11,23 @@ import { UsersService } from '../../users/users.service';
 })
 export class NavbarComponent implements OnInit {
   isLogged: boolean;
-  constructor(private usersService: UsersService, private router: Router) { }
-
+  constructor(private authService: AuthenticationService, private router: Router, private _snackBar: MatSnackBar,) { }
+  username: string;
   ngOnInit(): void {
-    this.usersService.isUserLogged().subscribe(data => {
-      this.isLogged = data;
-    })
+    this.isLogged = this.authService.isUserLogged();
+    let obj = JSON.parse(localStorage.getItem('currentUser')!);
+    if(obj){
+      this.username = obj['username']
+    }
+    
+    
   }
   logOut(): void {
-    this.usersService.logout();
+    this.authService.logout();
     this.router.navigate(['']);
+    this._snackBar.open("Logged out successfully", "", {
+      duration: 3000
+    });
   }
 
 }

@@ -1,14 +1,16 @@
 <mat-toolbar color="primary" class="navbar">
   <div>KPI Dashboard</div>
-  <div class="nav">
-   <a mat-button [routerLink]="['']" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Home</a>
-   <a mat-button [routerLink]="['/dashboard-catalogue']" routerLinkActive="active-link">Dashboards</a>
-   <a mat-button [routerLink]="['/about']" routerLinkActive="active-link">About</a>
-  </div>
-  <div *ngIf="!isLogged">
-    <a mat-raised-button [routerLink]="['/login']" routerLinkActive="active-link">Login</a>
-  </div>
-  <div *ngIf="isLogged">
-    <a mat-raised-button (click)="logOut()" [routerLink]="['']" routerLinkActive="active-link">Logout</a>
-  </div>
+  <div *ngIf="isLogged;then logged else not_logged"></div>    
+  <ng-template #logged>
+    <a mat-button [routerLink]="['/project']" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Project</a>
+    <a mat-button [routerLink]="['/dashboard-catalogue']" routerLinkActive="active-link">Dashboards</a>
+    <a mat-button [routerLink]="['/about']" routerLinkActive="active-link">How to use</a>
+    <a mat-raised-button [routerLink]="['/login']" (click)="logOut()" [routerLink]="['']"><mat-icon>logout</mat-icon>Logout</a>
+  </ng-template>
+  <ng-template #not_logged>
+      <a mat-button [routerLink]="['']" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" >Home</a>
+      <a mat-button [routerLink]="['/dashboard-catalogue']" routerLinkActive="active-link">Dashboards</a>
+      <a mat-button [routerLink]="['/about']" routerLinkActive="active-link">About</a>
+      <a mat-raised-button [routerLink]="['/login']" routerLinkActive="active-link">Login</a>
+  </ng-template>
 </mat-toolbar>
