@@ -30,6 +30,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService, UsersService } from './services/users/index';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DashboardsComponent } from './secured/dashboards/dashboards.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { HowtoComponent } from './secured/howto/howto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     DashboardCatalogueComponent,
     AboutComponent,
     LoginComponent,
-    ProjectComponent
+    ProjectComponent,
+    DashboardsComponent,
+    HowtoComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     HttpClientModule,
     NtkmeButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatMenuModule
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,
