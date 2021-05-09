@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="content">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="5">
+      <img src="assets/images/tfg-schema.png">
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="3.5">
+      <div class="project">
+        <h2>ABOUT THE PROJECT</h2>
+        <p>The KPI Dashboard Project is a TFG proposal thought by my tutor Joan Protasio <a href = "mailto: joan.protasio@uab.cat">(joan.protasio@uab.cat)</a></p>
+        <p>The main aim of the project is to build a KPI Dashboard from an existent Jira Scrum Board</p>
+        <p>The amount of developing time of this project goes from mid of February to the end of June </p>
+        <p>Extracting the data from the Jira Board through its API and storing it in a DataBase is part of another TFG proposal which is complemented by this project <button mat-stroked-button color="primary">Learn More</button></p>
+        
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile 
+      [colspan]="2"
+      [rowspan]="2">
+      <div class="me">
+        <h2>ABOUT ME</h2>
+        <p>I am Alex Fernandez Valladares, a 4th year Computer Engineering student at the Universitat Autònoma de Barcelona </p>
+        <span>
+          <a class="contact" href = "mailto: alex.fernandezv@e-campus.uab.cat" mat-raised-button>Contact me <mat-icon>mail</mat-icon></a>
+          <ntkme-github-button class="github"
+            user="alexfernandezv"
+            type="follow"
+            >
+          </ntkme-github-button>
+        </span>
+       
+      </div>      
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

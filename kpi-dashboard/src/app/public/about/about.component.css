@@ -1,0 +1,27 @@
+p{
+  text-align: left;
+  margin-left: 80px;
+  margin-bottom: 20px;
+  font-size: 17px;
+  
+}
+div{
+  margin-right: 20px;
+}
+.project p{
+  width: 70%;
+}
+.me p{
+  width: 80%;
+}
+.contact{
+  margin-bottom: 15px;
+  display:inline-block;
+}
+h2{
+  font-weight: bold;
+}
+.github{
+  display: inline-block;
+  margin-left: 10px;
+}

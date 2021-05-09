@@ -1,0 +1,106 @@
+.content{
+  padding-top:7em;
+  text-align: center;
+}
+.first-container{
+  padding-bottom: 60px;
+  border-bottom: 1px solid gainsboro;
+}
+h1{
+  font-size:50px;
+  font-weight: bold;
+}
+.questions{
+  padding-top: 2em;
+}
+.example-card {
+  box-shadow: 0 4px 2px -2px gray !important;
+}
+mat-card{
+  max-width: 600px;
+  box-shadow: 0 4px 2px -2px gray !important;
+  background-color: #673ab7;
+  height:150px;
+}
+mat-card:hover{
+  background-color: darkviolet ;
+}
+mat-card-header{
+  font-size:30px;
+}
+mat-card-content{
+  font-size:20px;
+  text-align: justify;
+}
+mat-card-content p{
+  color:white;
+}
+mat-card-title{
+  color:white;
+}
+
+.first-container img{
+  float: left;
+  margin-left: 300px;
+  width:300px;
+}
+mat-icon{
+  padding-right: 1em;
+}
+.check{
+  float:right;
+  font-size: 14px;
+  margin-bottom: 15px !important;
+  height: 30px;
+  font-weight: bold;
+}
+.check:hover{
+  background-color: lightsalmon;
+}
+.title{
+  text-align: center;
+  margin-right: 200px;
+  
+}
+.subtitle{
+  margin-top: 50px;
+  font-size: 25px;
+  margin-right: 90px;
+  text-align: right;
+}
+.second-container{
+  margin-top:30px; 
+}
+.second-container img{
+  width:400px;
+  float: left;
+  margin-left: 250px;
+}
+.second-container-2 h2{
+  font-size:30px;
+  float: left;
+  width: 30%;
+}
+
+.second-container-2 .explanation{
+  float: left;
+  width: 25%;
+  text-align: justify;
+  margin-left: 30px;
+}
+.second-container-2 .explanation p{
+  font-size: 15px;
+}
+.second-container-3{
+  margin-top:300px;
+}
+.second-container-3 h2{
+  float:left;
+  margin-top: 60px;
+  font-size: 30px;
+}
+
+mat-grid-tile p {
+  width: 70%;
+  text-align: left;
+}
