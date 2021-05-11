@@ -31,8 +31,13 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService, UsersService } from './services/users/index';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardsComponent } from './secured/dashboards/dashboards.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { HowtoComponent } from './secured/howto/howto.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { TeamManagementComponent } from './secured/dashboards/team-management/team-management.component';
+import { SprintManagementComponent } from './secured/dashboards/sprint-management/sprint-management.component';
+import { EfectivenessManagementComponent } from './secured/dashboards/efectiveness-management/efectiveness-management.component';
+import { BugManagementComponent } from './secured/dashboards/bug-management/bug-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +48,11 @@ import { HowtoComponent } from './secured/howto/howto.component';
     LoginComponent,
     ProjectComponent,
     DashboardsComponent,
-    HowtoComponent
+    HowtoComponent,
+    TeamManagementComponent,
+    SprintManagementComponent,
+    EfectivenessManagementComponent,
+    BugManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,8 @@ import { HowtoComponent } from './secured/howto/howto.component';
     HttpClientModule,
     NtkmeButtonModule,
     FontAwesomeModule,
-    MatMenuModule
+    MatMenuModule,
+    LayoutModule
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,
