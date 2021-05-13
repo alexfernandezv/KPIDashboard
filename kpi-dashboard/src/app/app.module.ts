@@ -38,6 +38,7 @@ import { TeamManagementComponent } from './secured/dashboards/team-management/te
 import { SprintManagementComponent } from './secured/dashboards/sprint-management/sprint-management.component';
 import { EfectivenessManagementComponent } from './secured/dashboards/efectiveness-management/efectiveness-management.component';
 import { BugManagementComponent } from './secured/dashboards/bug-management/bug-management.component';
+import { KpiTeamManagementCardComponent } from './secured/dashboards/team-management/kpi-team-management-card/kpi-team-management-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { BugManagementComponent } from './secured/dashboards/bug-management/bug-
     TeamManagementComponent,
     SprintManagementComponent,
     EfectivenessManagementComponent,
-    BugManagementComponent
+    BugManagementComponent,
+    KpiTeamManagementCardComponent,
   ],
   imports: [
     BrowserModule,
