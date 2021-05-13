@@ -1,14 +1,21 @@
 module.exports = (sequelize, Sequelize) => {
   const Project = sequelize.define("project", {
-    title: {
+    project_id: {
+      type: Sequelize.STRING,
+      primaryKey: true
+    },
+    project_name: {
       type: Sequelize.STRING
     },
-    revenue: {
-      type: Sequelize.INTEGER
+    start_date: {
+      type: Sequelize.DATE
     },
-    description: {
-      type: Sequelize.STRING
+    end_date: {
+      type: Sequelize.DATE
     }
+    
+  }, {
+    tableName: 'project'
   });
 
   return Project;
