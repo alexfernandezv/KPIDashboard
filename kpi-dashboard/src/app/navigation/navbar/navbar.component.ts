@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     this.isLogged = this.authService.isUserLogged();
     let obj = JSON.parse(localStorage.getItem('currentUser')!);
     if(obj){
-      this.username = obj['username']
+      this.username = obj['firstName']
     }
     
     
