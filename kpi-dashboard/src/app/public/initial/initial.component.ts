@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/users';
-import { UsersService } from '../../services/users/users.service';
+import { AuthenticationService } from 'src/app/services/authentication';
 
 @Component({
   selector: 'app-initial',

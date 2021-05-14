@@ -3,9 +3,6 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  // Create a new Tutorial
-  router.post("/create", project.create);
-
   // Retrieve all project
   router.get("/projects", project.findAll);
 
@@ -13,7 +10,7 @@ module.exports = app => {
   router.get("/published", project.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", project.findOne);
+  router.get("/projects/:id", project.findOne);
 
   // Update a Tutorial with id
   router.put("/:id", project.update);

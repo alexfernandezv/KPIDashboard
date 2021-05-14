@@ -28,7 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDatepickerModule } from '@angular/material/datepicker'; 
 import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { AuthenticationService, UsersService } from './services/users/index';
+import { UsersService } from './services/users/index';
+import { AuthenticationService } from './services/authentication'
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardsComponent } from './secured/dashboards/dashboards.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -38,6 +39,7 @@ import { TeamManagementComponent } from './secured/dashboards/team-management/te
 import { SprintManagementComponent } from './secured/dashboards/sprint-management/sprint-management.component';
 import { EfectivenessManagementComponent } from './secured/dashboards/efectiveness-management/efectiveness-management.component';
 import { BugManagementComponent } from './secured/dashboards/bug-management/bug-management.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import { KpiTeamManagementCardComponent } from './secured/dashboards/team-management/kpi-team-management-card/kpi-team-management-card.component';
 @NgModule({
   declarations: [
@@ -54,7 +56,7 @@ import { KpiTeamManagementCardComponent } from './secured/dashboards/team-manage
     SprintManagementComponent,
     EfectivenessManagementComponent,
     BugManagementComponent,
-    KpiTeamManagementCardComponent,
+    KpiTeamManagementCardComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import { KpiTeamManagementCardComponent } from './secured/dashboards/team-manage
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule, 
+    MatProgressSpinnerModule,
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,

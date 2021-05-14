@@ -3,6 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { mergeMap, delay, dematerialize, materialize} from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -10,7 +11,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
+        let testUser = { firstName: "Alex",  lastName: "Fernandez", password:"test", username: "test", project_id: 1 };
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -19,7 +20,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 if (request.body.username === testUser.username && request.body.password === testUser.password) {
                     // if login details are valid return 200 OK with a fake jwt token
-                    return of(new HttpResponse({ status: 200, body: { token: 'fake-jwt-token', username: request.body.username  } }));
+                    return of(new HttpResponse({ status: 200, body: { token: 'fake-jwt-token', username: request.body.username,  firstName: testUser.firstName, lastName: testUser.lastName, project_id: testUser.project_id } }));
                 } else {
                     // else return 400 bad request
                     return Observable.throw('Username or password is incorrect');

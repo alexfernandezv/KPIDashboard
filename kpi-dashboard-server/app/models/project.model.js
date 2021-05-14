@@ -12,7 +12,11 @@ module.exports = (sequelize, Sequelize) => {
     },
     end_date: {
       type: Sequelize.DATE
-    }
+    },
+    revenue: {
+      type: Sequelize.INTEGER
+    },
+
     
   }, {
     tableName: 'project'

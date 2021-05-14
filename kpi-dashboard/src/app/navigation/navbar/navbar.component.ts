@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/users/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { UsersService } from '../../services/users/users.service';
 
 @Component({

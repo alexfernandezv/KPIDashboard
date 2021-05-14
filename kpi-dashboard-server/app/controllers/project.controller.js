@@ -2,35 +2,6 @@ const db = require("../models");
 const Project = db.project;
 const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.title) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
-
-  // Create a Tutorial
-  const project = {
-    title: req.body.title,
-    revenue: req.body.revenue,
-    description: req.body.description
-  };
-
-  // Save Tutorial in the database
-  Project.create(project)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
-      });
-    });
-};
-
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
@@ -50,6 +21,17 @@ exports.findAll = (req, res) => {
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Project.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
   
 };
 
