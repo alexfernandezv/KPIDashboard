@@ -2,8 +2,8 @@ const db = require("../models");
 const Sprint = db.sprint;
 const Op = db.Sequelize.Op;
 
-exports.findAll = (req, res) => {
-  const id = req.query.id;
+exports.findAllSprintsByProjectId = (req, res) => {
+  const id = req.params.id;
   var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
 
   Sprint.findAll({ where: condition })
@@ -18,7 +18,7 @@ exports.findAll = (req, res) => {
     });
   
 };
-exports.findOne = (req, res) => {
+exports.findSprintById= (req, res) => {
   const id = req.params.id;
   Sprint.findByPk(id)
     .then(data => {

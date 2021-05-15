@@ -3,7 +3,7 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  router.get("/projects/:id", project.findOne);
+  router.get("/projects/:id", project.findProjectById);
   
   
   
