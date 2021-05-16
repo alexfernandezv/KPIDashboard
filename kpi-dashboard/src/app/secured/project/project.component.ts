@@ -20,11 +20,13 @@ export class ProjectComponent implements OnInit {
   user: User;
   project: Project;
   sprints: Sprint[];
+  members: Array<String> = [];
   tasks: Array<Task[]> = [];
   date1 = new FormControl(new Date())
   date2 = new FormControl(new Date())
-  projectId: Number;
-
+  projectId: number;
+  workedHours: number = 0;
+  weeksRemaining: number = 0;
   constructor(private authService: AuthenticationService, private projectService: ProjectService, 
     private sprintService: SprintService, private taskService: TaskService
      ) { }
@@ -37,6 +39,7 @@ export class ProjectComponent implements OnInit {
       this.project = data;
       this.date1.setValue(this.project.start_date);
       this.date2.setValue(this.project.end_date);
+      this.weeksRemaining = this.weeksBetween(new Date(),new Date(data.end_date));
     },error => {
       console.log(error);
     });
@@ -45,17 +48,35 @@ export class ProjectComponent implements OnInit {
       this.sprints = data;
       for(let i=0;i<this.sprints.length;i++){
         this.taskService.getAllTasksBySprintId(this.sprints[i].sprint_id).subscribe(data => {
+          this.computeWorkedHoursAndMembers(data)
           this.tasks.push(data);
+          
         },error => {
           console.log(error);
         });
       }
-      console.log("Tasks",this.tasks)
-      console.log("Sprints", this.sprints)
+      
     },error => {
       console.log(error);
     });
-      
+    
   }
+
+  computeWorkedHoursAndMembers(tasks){
+    for(let i=0;i<tasks.length;i++){
+      this.workedHours += tasks[i].worked_hours;
+      if(this.members.indexOf(tasks[i].User_username) <= -1){
+        this.members.push(tasks[i].User_username)
+      }
+    }
+  }
+
+  weeksBetween(d1, d2) {
+    let remaining= Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
+    if(remaining <0){
+      remaining=0
+    }
+    return remaining;
+}
 
 }

@@ -1,16 +1,14 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div *ngIf="(project && sprints); else not_loaded">
+  <div *ngIf="(project && sprints && tasks && workedHours && members); else not_loaded">
     <h1>Project Information</h1>
     <div class="row">
       <div class="column">
         <h2>Team Members</h2>
-        <mat-icon>person</mat-icon>
-        <br/>
-        <mat-icon>person</mat-icon>
-        <br/>
-        <mat-icon>person</mat-icon>
-        
+        <div *ngFor="let member of members">
+          <mat-icon>person</mat-icon>{{member}}
+          <br/>
+        </div>
       </div>
       <div class="column">
         <br/>
@@ -26,10 +24,10 @@
       </div>
       <div class="column">
         <h2>Total Hours Worked</h2>
-        <p>125 hours</p>
+        <p>{{workedHours}} hours</p>
         <br/>
         <h2>Weeks remaining</h2>
-        <p>3 weeks</p>
+        <p>{{weeksRemaining}} weeks</p>
         <br/>
         <h2>Total revenue</h2>
         <p>{{project.revenue}} $</p>

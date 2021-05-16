@@ -3,5 +3,5 @@ export class User {
   username: string;
   firstName: string;
   lastName: string;
-  project_id: Number;
+  project_id: number;
 }
