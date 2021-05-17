@@ -25,4 +25,5 @@ db.sequelize = sequelize;
 db.project = require("./project.model.js")(sequelize, Sequelize);
 db.sprint = require("./sprint.model.js")(sequelize, Sequelize);
 db.task = require("./task.model.js")(sequelize, Sequelize);
+db.user = require("./user.model.js")(sequelize, Sequelize);
 module.exports = db;
