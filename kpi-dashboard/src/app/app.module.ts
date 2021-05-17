@@ -40,7 +40,12 @@ import { SprintManagementComponent } from './secured/dashboards/sprint-managemen
 import { EfectivenessManagementComponent } from './secured/dashboards/efectiveness-management/efectiveness-management.component';
 import { BugManagementComponent } from './secured/dashboards/bug-management/bug-management.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
-import { KpiTeamManagementCardComponent } from './secured/dashboards/team-management/kpi-team-management-card/kpi-team-management-card.component';
+import { ChartsModule } from 'ng2-charts';
+import { MiniCardComponent } from './secured/mini-card/mini-card.component';
+import { CardComponent } from './secured/card/card.component';
+import { RolesChartComponent } from './secured/dashboards/team-management/charts/roles-chart/roles-chart.component';
+import { DoneVsPlannedComponent } from './secured/dashboards/team-management/charts/done-vs-planned/done-vs-planned.component';
+import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management/charts/planned-vs-utilized/planned-vs-utilized.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +61,11 @@ import { KpiTeamManagementCardComponent } from './secured/dashboards/team-manage
     SprintManagementComponent,
     EfectivenessManagementComponent,
     BugManagementComponent,
-    KpiTeamManagementCardComponent
+    MiniCardComponent,
+    CardComponent,
+    RolesChartComponent,
+    DoneVsPlannedComponent,
+    PlannedVsUtilizedComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,8 @@ import { KpiTeamManagementCardComponent } from './secured/dashboards/team-manage
     NtkmeButtonModule,
     FontAwesomeModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    ChartsModule
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,

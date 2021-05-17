@@ -36,6 +36,3 @@ mat-form-field{
 .inputs{
   display: inline-flex;
 }
-mat-spinner{
-  margin:0 auto;
-}

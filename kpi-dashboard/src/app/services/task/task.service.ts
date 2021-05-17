@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
 
 const baseUrl = 'http://localhost:8080/api/tasks';
 
@@ -8,7 +9,7 @@ const baseUrl = 'http://localhost:8080/api/tasks';
   providedIn: 'root'
 })
 export class TaskService {
-
+  private _tasks$ = new Subject<Task[]>();
   constructor(private http: HttpClient) { }
 
   getAllTasksBySprintId(id): Observable<any>{
