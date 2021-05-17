@@ -5,6 +5,8 @@ import { CookieService } from "ngx-cookie-service";
 import { User } from '../../models/user';
 import { AuthenticationService } from "../authentication/authentication.service";
 
+
+const baseUrl = 'http://localhost:8080/api/users';
 @Injectable({
   providedIn: "root"
 })
@@ -14,6 +16,14 @@ export class UsersService {
 
   getAll() {
     return this.http.get<User[]>('/api/users');
-}
+  }
+
+  getUserById(id){
+    return this.http.get(`${baseUrl}/${id}`);
+  }
+
+  getUserRoleById(id){
+    return this.http.get(`${baseUrl}Role/${id}`);
+  }
 
 }

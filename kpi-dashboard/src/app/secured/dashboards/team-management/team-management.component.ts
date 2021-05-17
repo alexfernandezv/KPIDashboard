@@ -11,6 +11,7 @@ import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { Observable, Subject } from 'rxjs';
+import { UsersService } from 'src/app/services/users';
 
 @Component({
   selector: 'app-team-management',
@@ -31,6 +32,7 @@ export class TeamManagementComponent implements OnInit{
   tasksFilled: Subject<boolean> = new Subject()
   estimatedHours: number = 0;
   neededHours: number = 0;
+  roles:  Array<String> = [];
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -51,7 +53,7 @@ export class TeamManagementComponent implements OnInit{
   );
 
   constructor(private breakpointObserver: BreakpointObserver, private taskService: TaskService, 
-    private sprintService: SprintService, private projectService: ProjectService, private authService: AuthenticationService) {}
+    private sprintService: SprintService, private projectService: ProjectService, private authService: AuthenticationService, private userService: UsersService) {}
 
   ngOnInit(){
     this.user = this.authService.getLoggedUser();
@@ -70,7 +72,19 @@ export class TeamManagementComponent implements OnInit{
     });
     this.tasksFilled.subscribe(data => {
       this.computeMiniCardValues();
-      
+      this.tasks.forEach(taskGroup => {
+        taskGroup.forEach(task =>{
+          this.userService.getUserRoleById(task.User_username).subscribe(data => {
+            
+            this.roles.push(data['role']);
+            
+          })
+          
+        
+        })
+        
+      })
+      console.log(this.roles)
     })
   }
 
