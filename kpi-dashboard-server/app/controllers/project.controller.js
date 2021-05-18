@@ -29,3 +29,29 @@ exports.findAll = (req, res) => {
     });
   
 };
+exports.getUsersOfProject = (req, res) => {
+  const id = req.params.id;
+
+  Project.findByPk(id, { include: ["users"] })
+    .then(data => {
+      var roles ={}
+      data.users.forEach(user => {
+        if(user.role in Object.keys(roles)){
+          let count = roles[user.role]
+          roles[user.role] = count +1;
+        }
+        else{
+          roles[user.role] = 1;
+        }
+        
+      })
+      res.send({roles: roles})
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+  
+};
+

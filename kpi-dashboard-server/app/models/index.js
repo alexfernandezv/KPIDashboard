@@ -38,5 +38,10 @@ db.task.belongsTo(db.sprint, {
   foreignKey: "Sprint_sprint_id",
   as: "sprint",
 });
+db.project.hasMany(db.user, { foreignKey: "Project_project_id" , as: "users" });
+db.user.belongsTo(db.project, {
+  foreignKey: "Project_project_id",
+  as: "project",
+});
 
 module.exports = db;

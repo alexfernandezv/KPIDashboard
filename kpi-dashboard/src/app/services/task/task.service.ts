@@ -12,9 +12,6 @@ export class TaskService {
   private _tasks$ = new Subject<Task[]>();
   constructor(private http: HttpClient) { }
 
-  getAllTasksBySprintId(id): Observable<any>{
-    return this.http.get(`${baseUrl}/sprint/${id}`);
-  }
   getTaskById(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}`);
   }

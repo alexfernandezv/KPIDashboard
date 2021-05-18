@@ -4,8 +4,8 @@ module.exports = app => {
   var router = require("express").Router();
 
   router.get("/sprints/:id", sprint.findSprintById);
-  router.get("/sprints/project/:id", sprint.findSprintByProjectId);
-  router.get("/sprints/", sprint.findSprintByProjectId);
+  router.get("/sprints/project/:id", sprint.findSprintsByProjectId);
+
   
   
   

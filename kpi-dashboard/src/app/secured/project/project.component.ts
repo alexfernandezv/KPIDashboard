@@ -27,9 +27,7 @@ export class ProjectComponent implements OnInit {
   projectId: number;
   workedHours: number = 0;
   weeksRemaining: number = 0;
-  constructor(private authService: AuthenticationService, private projectService: ProjectService, 
-    private sprintService: SprintService, private taskService: TaskService
-     ) { }
+  constructor(private authService: AuthenticationService, private projectService: ProjectService) { }
 
   ngOnInit() {
   
@@ -44,33 +42,20 @@ export class ProjectComponent implements OnInit {
       console.log(error);
     });
 
-    this.sprintService.getAllSprintsByProjectId(this.projectId).subscribe(data => {
-      this.sprints = data;
-      for(let i=0;i<this.sprints.length;i++){
-        this.taskService.getAllTasksBySprintId(this.sprints[i].sprint_id).subscribe(data => {
-          this.computeWorkedHoursAndMembers(data)
-          this.tasks.push(data);
-          
-        },error => {
-          console.log(error);
-        });
-      }
-      
+    this.projectService.getAllTasksOfProject(this.projectId).subscribe(data => {
+      this.tasks = data.tasks
     },error => {
       console.log(error);
-    });
+    })
+    this.projectService.getProjectWorkedHours(this.projectId).subscribe(data => {
+      this.workedHours = data.total_worked_hours
+    })
+    this.projectService.getProjectMembers(this.projectId).subscribe(data => {
+      this.members = data.members;
+    })
+    
     
   }
-
-  computeWorkedHoursAndMembers(tasks){
-    for(let i=0;i<tasks.length;i++){
-      this.workedHours += tasks[i].worked_hours;
-      if(this.members.indexOf(tasks[i].User_username) <= -1){
-        this.members.push(tasks[i].User_username)
-      }
-    }
-  }
-
   weeksBetween(d1, d2) {
     let remaining= Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
     if(remaining <0){
