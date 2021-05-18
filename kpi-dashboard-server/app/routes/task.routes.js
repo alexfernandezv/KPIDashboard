@@ -3,7 +3,6 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  router.get("/tasks/sprint/:id", task.findAllTasksOfSprint);
   router.get("/tasks/:id", task.findTaskById);
   
   
