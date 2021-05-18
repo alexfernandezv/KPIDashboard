@@ -14,4 +14,22 @@ export class ProjectService {
   getProjectById(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}`);
   }
+  getProjectWorkedHours(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/worked_hours`);
+  }
+  getAllTasksOfProject(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/tasks`);
+  }
+  getProjectMembers(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/members`);
+  }
+  getAllTasksEstimatedAndNeededHours(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/tasks/hours`);
+  }
+  getTaskCompletion(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/tasks/check_completion`);
+  }
+  getProjectRoles(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/user_roles`);
+  }
 }

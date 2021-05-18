@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div *ngIf="(project && sprints && tasks); else not_loaded">
+  <div *ngIf="(project && members && taskCompletionRatio); else not_loaded">
     <div class="grid-container">
       <h1 class="mat-h1">Scrum Team Management Dashboard</h1>
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">

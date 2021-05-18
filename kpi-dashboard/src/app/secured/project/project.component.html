@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div *ngIf="(project && sprints && tasks && workedHours && members); else not_loaded">
+  <div *ngIf="project; else not_loaded">
     <h1>Project Information</h1>
     <div class="row">
       <div class="column">
