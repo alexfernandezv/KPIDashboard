@@ -43,5 +43,10 @@ db.user.belongsTo(db.project, {
   foreignKey: "Project_project_id",
   as: "project",
 });
+db.user.hasMany(db.task, { foreignKey: "User_username" , as: "tasks" });
+db.task.belongsTo(db.user, {
+  foreignKey: "User_username",
+  as: "user",
+});
 
 module.exports = db;

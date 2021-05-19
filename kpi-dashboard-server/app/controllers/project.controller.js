@@ -36,7 +36,7 @@ exports.getUsersOfProject = (req, res) => {
     .then(data => {
       var roles ={}
       data.users.forEach(user => {
-        if(user.role in Object.keys(roles)){
+        if(user.role in roles == true){
           let count = roles[user.role]
           roles[user.role] = count +1;
         }

@@ -26,4 +26,8 @@ export class UsersService {
     return this.http.get(`${baseUrl}Role/${id}`);
   }
 
+  getTasksPerRoles(id){
+    return this.http.get(`${baseUrl}/${id}/tasks_per_role`);
+  }
+
 }

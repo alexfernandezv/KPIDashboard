@@ -26,5 +26,46 @@ exports.findUserRoleByUsername = (req, res) => {
         message: "Error"
       });
     });
-  
+};
+
+exports.findTasksPerRole= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  User.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var roles ={}
+      data.forEach(user => {
+        if(user.role in roles == false){
+          let completedTasks = 0;
+          let totalTasks = 0;
+          user.tasks.forEach(task => {
+            if(task.status == "Completed"){
+              completedTasks++;
+            }
+            totalTasks++;
+          })
+          roles[user.role] = {completedTasks: completedTasks, totalTasks: totalTasks}
+        }
+        else{
+          let auxCompletedTasks = roles[user.role].completedTasks;
+          let auxTotalTasks = roles[user.role].totalTasks;
+          let completedTasks = 0;
+          let totalTasks = 0;
+          user.tasks.forEach(task => {
+            if(task.status == "Completed"){
+              completedTasks++;
+            }
+            totalTasks++;
+          })
+          roles[user.role] =  {completedTasks: completedTasks + auxCompletedTasks, totalTasks: totalTasks + auxTotalTasks}
+        }
+        
+      })
+      res.send(roles)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
 };
