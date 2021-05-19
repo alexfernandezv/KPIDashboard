@@ -1,5 +1,5 @@
 <div style="display: block;">
-  <canvas baseChart
+  <canvas baseChart *ngIf="chartReady; else loading"
     [data]="pieChartData"
     [labels]="pieChartLabels"
     [chartType]="pieChartType"
@@ -7,4 +7,7 @@
     [plugins]="pieChartPlugins"
     [legend]="pieChartLegend">
   </canvas>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

@@ -85,7 +85,6 @@ export class TeamManagementComponent implements OnInit{
     })
     this.projectService.getProjectRoles(this.projectId).subscribe(data => {
       this.roles = data.roles;
-      console.log(this.roles)
     })
   }
  
