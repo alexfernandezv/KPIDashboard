@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { AuthenticationService } from 'src/app/services/authentication';
+import { UsersService } from 'src/app/services/users';
 
 @Component({
   selector: 'app-planned-vs-utilized',
@@ -12,19 +14,33 @@ export class PlannedVsUtilizedComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [], label: 'Planned hours', backgroundColor: "yellow" },
+    { data: [], label: 'Needed hours', backgroundColor: "#ff6384" }
   ];
-
-  constructor() { }
+  public chartReady : boolean = false;
+  constructor(private usersService: UsersService, private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.usersService.getHoursPerRoles(this.authService.getLoggedUser().project_id).subscribe(data => {
+      let datasetPlanned = [];
+      let datasetNeeded = [];
+      let labels = []
+      for(let role in data){
+        labels.push(role)
+        datasetPlanned.push(data[role].hoursPlanned)
+        datasetNeeded.push(data[role].hoursNeeded)
+      }
+      this.barChartLabels = labels;
+      this.barChartData[0].data = datasetPlanned;
+      this.barChartData[1].data = datasetNeeded;
+      this.chartReady = true;
+    })
   }
 
 }

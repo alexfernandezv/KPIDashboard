@@ -68,4 +68,42 @@ exports.findTasksPerRole= (req, res) => {
         message: "Error"
       });
     });
-};
+  }
+
+  exports.findHoursPerRole= (req, res) => {
+    const id = req.params.id;
+    var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+    User.findAll({where: condition, include: ["tasks"] })
+      .then(data => {
+        var roles ={}
+        data.forEach(user => {
+          if(user.role in roles == false){
+            let hoursNeeded = 0;
+            let hoursPlanned= 0;
+            user.tasks.forEach(task => {
+              hoursNeeded += task.worked_hours;
+              hoursPlanned += task.estimated_duration;
+            })
+            roles[user.role] = {hoursNeeded: hoursNeeded, hoursPlanned: hoursPlanned}
+          }
+          else{
+            let auxHoursNeeded = roles[user.role].hoursNeeded;
+            let auxHoursPlanned = roles[user.role].hoursPlanned;
+            let hoursNeeded = 0;
+            let hoursPlanned= 0;
+            user.tasks.forEach(task => {
+              hoursNeeded += task.worked_hours;
+              hoursPlanned += task.estimated_duration;
+            })
+            roles[user.role] =  {hoursNeeded: hoursNeeded + auxHoursNeeded, hoursPlanned: hoursPlanned + auxHoursPlanned}
+          }
+          
+        })
+        res.send(roles)
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error"
+        });
+      });
+  }

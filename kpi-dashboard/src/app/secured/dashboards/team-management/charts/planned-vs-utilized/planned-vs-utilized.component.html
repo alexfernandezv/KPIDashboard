@@ -1,5 +1,5 @@
 <div style="display: block;">
-  <canvas baseChart
+  <canvas baseChart *ngIf="chartReady; else loading"
     [datasets]="barChartData"
     [labels]="barChartLabels"
     [options]="barChartOptions"
@@ -7,4 +7,7 @@
     [legend]="barChartLegend"
     [chartType]="barChartType">
   </canvas>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

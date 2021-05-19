@@ -78,7 +78,7 @@ export class TeamManagementComponent implements OnInit{
     this.projectService.getTaskCompletion(this.projectId).subscribe(data => {
       this.completedTasks = data.completed_tasks;
       this.notCompletedTasks = data.notCompleted_tasks;
-      this.taskCompletionRatio= (this.completedTasks / (this.completedTasks + this.notCompletedTasks)) * 100;
+      this.taskCompletionRatio = Math.round( (this.completedTasks / (this.completedTasks + this.notCompletedTasks)) * 100);
     })
     this.projectService.getProjectMembers(this.projectId).subscribe(data => {
       this.members = data.members;
