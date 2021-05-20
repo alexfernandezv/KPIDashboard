@@ -7,5 +7,6 @@ module.exports = app => {
   router.get("/usersRole/:id", user.findUserRoleByUsername);
   router.get("/users/:id/tasks_per_role", user.findTasksPerRole)
   router.get("/users/:id/hours_per_role", user.findHoursPerRole)
+  router.get("/users/:id/bugs_per_role", user.findBugsPerRole)
   app.use('/api/', router);
 };

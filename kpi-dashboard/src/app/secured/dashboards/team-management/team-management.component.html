@@ -3,6 +3,7 @@
   <div *ngIf="(project && members && taskCompletionRatio); else not_loaded">
     <div class="grid-container">
       <h1 class="mat-h1">Scrum Team Management Dashboard</h1>
+      <button mat-stroked-button class="export" color="primary">Export</button>
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">
         <!--Mini Cards-->
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
@@ -44,8 +45,8 @@
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Team Roles">
-            
+          <app-card title="Bugs per role">
+            <app-bugs-per-role></app-bugs-per-role>
           </app-card>
         </mat-grid-tile>
       </mat-grid-list>

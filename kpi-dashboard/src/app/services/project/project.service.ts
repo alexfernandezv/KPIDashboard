@@ -23,6 +23,9 @@ export class ProjectService {
   getProjectMembers(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}/members`);
   }
+  getUsernamesRole(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/username_roles`);
+  }
   getAllTasksEstimatedAndNeededHours(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}/tasks/hours`);
   }

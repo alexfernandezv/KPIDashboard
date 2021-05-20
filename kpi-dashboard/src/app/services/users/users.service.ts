@@ -30,9 +30,11 @@ export class UsersService {
     return this.http.get(`${baseUrl}/${id}/tasks_per_role`);
   }
 
-  
   getHoursPerRoles(id){
     return this.http.get(`${baseUrl}/${id}/hours_per_role`);
+  }
+  getBugsPerRoles(id){
+    return this.http.get(`${baseUrl}/${id}/bugs_per_role`);
   }
 
 }

@@ -107,3 +107,41 @@ exports.findTasksPerRole= (req, res) => {
         });
       });
   }
+
+  exports.findBugsPerRole= (req, res) => {
+    const id = req.params.id;
+    var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+    User.findAll({where: condition, include: ["tasks"] })
+      .then(data => {
+        var roles ={}
+        data.forEach(user => {
+          if(user.role in roles == false){
+            let bugs = 0
+            user.tasks.forEach(task => {
+              if(task.type == "Bug"){
+                bugs++;
+                
+              }
+            })
+            roles[user.role] = {bugs: bugs}
+          }
+          else{
+            let auxBugs = roles[user.role].bugs;
+            let bugs = 0;
+            user.tasks.forEach(task => {
+              if(task.type == "Bug"){
+                bugs++;
+              }
+            })
+            roles[user.role] =  { bugs: bugs + auxBugs }
+          }
+          
+        })
+        res.send(roles)
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error"
+        });
+      });
+    }

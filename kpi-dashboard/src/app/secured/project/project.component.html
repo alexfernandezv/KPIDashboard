@@ -5,9 +5,10 @@
     <div class="row">
       <div class="column">
         <h2>Team Members</h2>
-        <div *ngFor="let member of members">
-          <mat-icon>person</mat-icon>{{member}}
-          <br/>
+        <div class="members">
+          <div class="member" *ngFor="let member of members; let i=index">
+            <mat-icon  [matTooltip]="roles[i]" matTooltipPosition="left" class="member">person</mat-icon>{{member}}
+          </div>
         </div>
       </div>
       <div class="column">

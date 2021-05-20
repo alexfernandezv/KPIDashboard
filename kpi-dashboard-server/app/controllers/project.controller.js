@@ -54,4 +54,22 @@ exports.getUsersOfProject = (req, res) => {
     });
   
 };
+exports.getUsernamesAndRoles = (req, res) => {
+  const id = req.params.id;
+
+  Project.findByPk(id, { include: ["users"] })
+    .then(data => {
+      var roles ={}
+      data.users.forEach(user => {
+          roles[user.username] = user.role
+      })
+      res.send(roles)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+  
+};
 

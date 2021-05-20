@@ -20,13 +20,14 @@ export class ProjectComponent implements OnInit {
   user: User;
   project: Project;
   sprints: Sprint[];
-  members: Array<String> = [];
+  members: Array<string> = [];
   tasks: Array<Task[]> = [];
   date1 = new FormControl(new Date())
   date2 = new FormControl(new Date())
   projectId: number;
   workedHours: number = 0;
   weeksRemaining: number = 0;
+  roles: Array<string> = [];
   constructor(private authService: AuthenticationService, private projectService: ProjectService) { }
 
   ngOnInit() {
@@ -50,8 +51,11 @@ export class ProjectComponent implements OnInit {
     this.projectService.getProjectWorkedHours(this.projectId).subscribe(data => {
       this.workedHours = data.total_worked_hours
     })
-    this.projectService.getProjectMembers(this.projectId).subscribe(data => {
-      this.members = data.members;
+    this.projectService.getUsernamesRole(this.projectId).subscribe(data => {
+      for(let member in data){
+        this.members.push(member)
+        this.roles.push(data[member])
+      }
     })
     
     

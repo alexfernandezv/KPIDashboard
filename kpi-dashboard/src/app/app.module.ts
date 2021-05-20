@@ -46,6 +46,7 @@ import { CardComponent } from './secured/card/card.component';
 import { RolesChartComponent } from './secured/dashboards/team-management/charts/roles-chart/roles-chart.component';
 import { DoneVsPlannedComponent } from './secured/dashboards/team-management/charts/done-vs-planned/done-vs-planned.component';
 import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management/charts/planned-vs-utilized/planned-vs-utilized.component';
+import { BugsPerRoleComponent } from './secured/dashboards/team-management/charts/bugs-per-role/bugs-per-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management
     CardComponent,
     RolesChartComponent,
     DoneVsPlannedComponent,
-    PlannedVsUtilizedComponent
+    PlannedVsUtilizedComponent,
+    BugsPerRoleComponent
   ],
   imports: [
     BrowserModule,

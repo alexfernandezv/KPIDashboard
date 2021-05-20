@@ -19,3 +19,11 @@
 .dashboard-card-content {
   text-align: center;
 }
+.export{
+  position: absolute;
+  top: 100px;
+  right: 50px;
+}
+.mat-h1{
+  font-size:30px;
+}

@@ -11,5 +11,6 @@ module.exports = app => {
   router.get("/projects/:id/tasks/hours", sprint.getProjectTasksEstimatedAndNeededHours);
   router.get("/projects/:id/tasks/check_completion", sprint.getTasksCompletedAndNot);
   router.get("/projects/:id/user_roles",project.getUsersOfProject)
+  router.get("/projects/:id/username_roles",project.getUsernamesAndRoles)
   app.use('/api/', router);
 };
