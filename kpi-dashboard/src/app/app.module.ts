@@ -28,11 +28,25 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDatepickerModule } from '@angular/material/datepicker'; 
 import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { AuthenticationService, UsersService } from './services/users/index';
+import { UsersService } from './services/users/index';
+import { AuthenticationService } from './services/authentication'
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardsComponent } from './secured/dashboards/dashboards.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { HowtoComponent } from './secured/howto/howto.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { TeamManagementComponent } from './secured/dashboards/team-management/team-management.component';
+import { SprintManagementComponent } from './secured/dashboards/sprint-management/sprint-management.component';
+import { EfectivenessManagementComponent } from './secured/dashboards/efectiveness-management/efectiveness-management.component';
+import { BugManagementComponent } from './secured/dashboards/bug-management/bug-management.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import { ChartsModule } from 'ng2-charts';
+import { MiniCardComponent } from './secured/mini-card/mini-card.component';
+import { CardComponent } from './secured/card/card.component';
+import { RolesChartComponent } from './secured/dashboards/team-management/charts/roles-chart/roles-chart.component';
+import { DoneVsPlannedComponent } from './secured/dashboards/team-management/charts/done-vs-planned/done-vs-planned.component';
+import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management/charts/planned-vs-utilized/planned-vs-utilized.component';
+import { BugsPerRoleComponent } from './secured/dashboards/team-management/charts/bugs-per-role/bugs-per-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +57,17 @@ import { HowtoComponent } from './secured/howto/howto.component';
     LoginComponent,
     ProjectComponent,
     DashboardsComponent,
-    HowtoComponent
+    HowtoComponent,
+    TeamManagementComponent,
+    SprintManagementComponent,
+    EfectivenessManagementComponent,
+    BugManagementComponent,
+    MiniCardComponent,
+    CardComponent,
+    RolesChartComponent,
+    DoneVsPlannedComponent,
+    PlannedVsUtilizedComponent,
+    BugsPerRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -60,12 +84,15 @@ import { HowtoComponent } from './secured/howto/howto.component';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule, 
+    MatProgressSpinnerModule,
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
     NtkmeButtonModule,
     FontAwesomeModule,
-    MatMenuModule
+    MatMenuModule,
+    LayoutModule,
+    ChartsModule
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,

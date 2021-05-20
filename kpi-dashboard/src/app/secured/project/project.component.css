@@ -36,3 +36,7 @@ mat-form-field{
 .inputs{
   display: inline-flex;
 }
+.members{
+  padding-left: 190px;
+  text-align: left;
+}

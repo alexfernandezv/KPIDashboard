@@ -1,57 +1,60 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <h1>Project Information</h1>
-  <div class="row">
-    <div class="column">
-      <h2>Team Members</h2>
-      <mat-icon>person</mat-icon>
-      <br/>
-      <mat-icon>person</mat-icon>
-      <br/>
-      <mat-icon>person</mat-icon>
-      
+  <div *ngIf="project; else not_loaded">
+    <h1>Project Information</h1>
+    <div class="row">
+      <div class="column">
+        <h2>Team Members</h2>
+        <div class="members">
+          <div class="member" *ngFor="let member of members; let i=index">
+            <mat-icon  [matTooltip]="roles[i]" matTooltipPosition="left" class="member">person</mat-icon>{{member}}
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <br/>
+        <br/>
+        <p style="font-size: 13px;">Project Name</p>
+        <h1 class="project_name">{{project.project_name}}</h1>
+        <br/>
+        <a mat-raised-button href="https://www.jira.com" target="_blank" >Jira Board link</a>
+        <br/>
+        <br/>
+        <br/>
+        
+      </div>
+      <div class="column">
+        <h2>Total Hours Worked</h2>
+        <p>{{workedHours}} hours</p>
+        <br/>
+        <h2>Weeks remaining</h2>
+        <p>{{weeksRemaining}} weeks</p>
+        <br/>
+        <h2>Total revenue</h2>
+        <p>{{project.revenue}} $</p>
+        <br/>
+        <br/>
+        <br/>
+      </div>
     </div>
-    <div class="column">
+    <div class="inputs">
+      <mat-form-field appearance="fill">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="dp3" [formControl]="date1" [disabled]="true">
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="true"></mat-datepicker>
+      </mat-form-field>
       <br/>
       <br/>
-      <p style="font-size: 13px;">Project Name</p>
-      <h1 class="project_name">Rocket Launch</h1>
-      <br/>
-      <a mat-raised-button href="https://www.jira.com" target="_blank" >Jira Board link</a>
-      <br/>
-      <br/>
-      <br/>
-      
-    </div>
-    <div class="column">
-      <h2>Total Hours Worked</h2>
-      <p>125 hours</p>
-      <br/>
-      <h2>Weeks remaining</h2>
-      <p>3 weeks</p>
-      <br/>
-      <h2>Total revenue</h2>
-      <p>100.000 $</p>
-      <br/>
-      <br/>
-      <br/>
+      <mat-form-field appearance="fill">
+        <mat-label>Estimated finish date</mat-label>
+        <input matInput [matDatepicker]="dp4" [formControl]="date2" [disabled]="true">
+        <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+        <mat-datepicker #dp4 disabled="true"></mat-datepicker>
+      </mat-form-field>
     </div>
   </div>
-  <div class="inputs">
-    <mat-form-field appearance="fill">
-      <mat-label>Start date</mat-label>
-      <input matInput [matDatepicker]="dp3" [formControl]="date1" [disabled]="true">
-      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-      <mat-datepicker #dp3 disabled="true"></mat-datepicker>
-    </mat-form-field>
-    <br/>
-    <br/>
-    <mat-form-field appearance="fill">
-      <mat-label>Estimated finish date</mat-label>
-      <input matInput [matDatepicker]="dp4" [formControl]="date2" [disabled]="true">
-      <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
-      <mat-datepicker #dp4 disabled="true"></mat-datepicker>
-    </mat-form-field>
-  </div>
-  
+  <ng-template #not_loaded>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

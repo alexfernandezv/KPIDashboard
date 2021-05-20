@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<div class="content">
+  <div *ngIf="(project && members && taskCompletionRatio); else not_loaded">
+    <div class="grid-container">
+      <h1 class="mat-h1">Scrum Team Management Dashboard</h1>
+      <button mat-stroked-button class="export" color="primary">Export</button>
+      <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">
+        <!--Mini Cards-->
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card title="Task completion ratio" [value]="taskCompletionRatio" color="yellow" icon="task" [percentage]="true"></app-mini-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card title="Number of workers" [value]="members.length" color="yellow" icon="person"></app-mini-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card title="Estimated hours" [value]="estimatedHours" color="yellow" icon="schedule"></app-mini-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card title="Needed hours" [value]="neededHours" color="yellow" icon="hourglass_top"></app-mini-card>
+        </mat-grid-tile>
+
+        
+        <!--Charts-->
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+          [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Team Roles">
+            <app-roles-chart></app-roles-chart>
+          </app-card>
+        </mat-grid-tile>
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Planned tasks vs Finished tasks  (per role)">
+            <app-done-vs-planned></app-done-vs-planned>
+          </app-card>
+        </mat-grid-tile>
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Planned hours vs Needed hours  (per role)">
+            <app-planned-vs-utilized></app-planned-vs-utilized>
+          </app-card>
+        </mat-grid-tile>
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Bugs per role">
+            <app-bugs-per-role></app-bugs-per-role>
+          </app-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>  
+  </div>
+  <ng-template #not_loaded>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+  
+</div>
