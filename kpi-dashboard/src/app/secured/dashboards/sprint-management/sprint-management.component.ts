@@ -30,6 +30,8 @@ export class SprintManagementComponent {
   selectedSprint = this.sprintListFilter[0].value;
   sprints: Sprint[];
   workedHours: any;
+  taskInfo: any;
+  completedTasks: any;
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -69,6 +71,17 @@ export class SprintManagementComponent {
         totalHours += data[v];
       }
       this.workedHours[0] = totalHours;
+    })
+    this.sprintService.getTasks(this.authService.getLoggedUser().project_id).subscribe(data => {
+     this.taskInfo = data;
+     let totalPlanned = 0;
+     let totalCompleted = 0;
+      for( let v in data){
+        totalPlanned += data[v].totalTasks;
+        totalCompleted += data[v].completedTasks;
+      }
+      this.taskInfo[0]= {"totalTasks": totalPlanned, "completedTasks": totalCompleted};
+      
     })
   }
   

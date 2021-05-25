@@ -49,6 +49,7 @@ import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management
 import { BugsPerRoleComponent } from './secured/dashboards/team-management/charts/bugs-per-role/bugs-per-role.component';
 import {MatSelectModule} from '@angular/material/select';
 import { FilterMiniCardComponent } from './secured/filter-mini-card/filter-mini-card.component';
+import { SprintVelocityComponent } from './secured/dashboards/sprint-management/charts/sprint-velocity/sprint-velocity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import { FilterMiniCardComponent } from './secured/filter-mini-card/filter-mini-
     DoneVsPlannedComponent,
     PlannedVsUtilizedComponent,
     BugsPerRoleComponent,
-    FilterMiniCardComponent
+    FilterMiniCardComponent,
+    SprintVelocityComponent
   ],
   imports: [
     BrowserModule,

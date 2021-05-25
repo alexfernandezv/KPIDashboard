@@ -24,11 +24,13 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Task completion ratio" [value]="selectedSprint" color="yellow" icon="task" [percentage]="true"></app-mini-card>
+          <app-mini-card *ngIf="taskInfo; else not_loaded" title="Planned tasks per Sprint" [value]="taskInfo[selectedSprint].totalTasks" color="yellow" icon="task"></app-mini-card>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Task completion ratio" [value]="selectedSprint" color="yellow" icon="task" [percentage]="true"></app-mini-card>
+          <app-mini-card *ngIf="taskInfo; else not_loaded" title="Completed tasks per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="yellow" icon="task"></app-mini-card>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
 
         
@@ -36,7 +38,7 @@
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
           [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Sprint velocity">
-            
+            <app-sprint-velocity></app-sprint-velocity>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"

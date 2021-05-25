@@ -157,6 +157,32 @@ exports.findHoursWorkedPerSprint= (req, res) => {
     });
 };
 
+exports.findTasksPerSprint= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var sprints ={};
+      data.forEach((sprint)=>{
+        var totalTasks = 0;
+        var completedTasks = 0;
+        sprint.tasks.forEach((task)=>{
+          if(task.status == 'Completed'){
+            completedTasks += 1;
+          }
+          totalTasks += 1;
+        })
+        sprints[sprint.sprint_id] = {totalTasks: totalTasks, completedTasks: completedTasks}
+      })
+      res.send(sprints)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
+
 
 
 
