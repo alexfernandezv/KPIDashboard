@@ -47,6 +47,8 @@ import { RolesChartComponent } from './secured/dashboards/team-management/charts
 import { DoneVsPlannedComponent } from './secured/dashboards/team-management/charts/done-vs-planned/done-vs-planned.component';
 import { PlannedVsUtilizedComponent } from './secured/dashboards/team-management/charts/planned-vs-utilized/planned-vs-utilized.component';
 import { BugsPerRoleComponent } from './secured/dashboards/team-management/charts/bugs-per-role/bugs-per-role.component';
+import {MatSelectModule} from '@angular/material/select';
+import { FilterMiniCardComponent } from './secured/filter-mini-card/filter-mini-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,8 @@ import { BugsPerRoleComponent } from './secured/dashboards/team-management/chart
     RolesChartComponent,
     DoneVsPlannedComponent,
     PlannedVsUtilizedComponent,
-    BugsPerRoleComponent
+    BugsPerRoleComponent,
+    FilterMiniCardComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +95,8 @@ import { BugsPerRoleComponent } from './secured/dashboards/team-management/chart
     FontAwesomeModule,
     MatMenuModule,
     LayoutModule,
-    ChartsModule
+    ChartsModule,
+    MatSelectModule
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,

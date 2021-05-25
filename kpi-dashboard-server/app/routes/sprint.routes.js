@@ -5,7 +5,7 @@ module.exports = app => {
 
   router.get("/sprints/:id", sprint.findSprintById);
   router.get("/sprints/project/:id", sprint.findSprintsByProjectId);
-
+  router.get("/sprints/project/:id/hours_worked", sprint.findHoursWorkedPerSprint);
   
   
   

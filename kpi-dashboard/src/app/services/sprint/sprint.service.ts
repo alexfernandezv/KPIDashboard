@@ -18,4 +18,8 @@ export class SprintService {
   getSprintById(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}`);
   }
+
+  getWorkedHours(id): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${id}/hours_worked`);
+  }
 }

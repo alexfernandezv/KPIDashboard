@@ -1,20 +1,26 @@
 <mat-card class="dashboard-card">
-  <mat-card-header class="card-header">
-      <mat-card-title>
-          <h1 *ngIf="!percentage" class="value-text">{{value}}</h1>
-          <h1 *ngIf="percentage" class="value-text">{{value}} %</h1>
-      </mat-card-title>
-      <div mat-card-avatar class="card-icon">
-          <mat-icon [color]="color" class="avatar-icon">{{icon}}</mat-icon>
-      </div>
-  </mat-card-header>
-  <h3 class="title-text">{{title}}</h3>
-  <!-- <p class="difference-text">
-      <span
-          [ngClass]="{ 'green-text': isIncrease, 'red-text': !isIncrease }">{{ isIncrease ? '+' : '-' }}{{ percentValue | percent:'2.1-2' }}
-          <mat-icon *ngIf="isIncrease">arrow_upward</mat-icon>
-          <mat-icon *ngIf="!isIncrease">arrow_downward</mat-icon>
-      </span>
-      <span class="duration">{{duration}}</span>
-  </p> -->
+    <div *ngIf="value; else not_loaded">
+        <mat-card-header class="card-header">
+            <mat-card-title>
+                <h1 *ngIf="!percentage" class="value-text">{{value}}</h1>
+                <h1 *ngIf="percentage" class="value-text">{{value}} %</h1>
+            </mat-card-title>
+            <div mat-card-avatar class="card-icon">
+                <mat-icon [color]="color" class="avatar-icon">{{icon}}</mat-icon>
+            </div>
+        </mat-card-header>
+        <h3 class="title-text">{{title}}</h3>
+        <!-- <p class="difference-text">
+            <span
+                [ngClass]="{ 'green-text': isIncrease, 'red-text': !isIncrease }">{{ isIncrease ? '+' : '-' }}{{ percentValue | percent:'2.1-2' }}
+                <mat-icon *ngIf="isIncrease">arrow_upward</mat-icon>
+                <mat-icon *ngIf="!isIncrease">arrow_downward</mat-icon>
+            </span>
+            <span class="duration">{{duration}}</span>
+        </p> -->
+        
+    </div>
+    <ng-template #not_loaded>
+        <mat-spinner></mat-spinner>
+    </ng-template>
 </mat-card>

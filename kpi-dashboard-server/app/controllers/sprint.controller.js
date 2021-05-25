@@ -133,6 +133,31 @@ exports.getTasksCompletedAndNot= (req, res) => {
     });
 };
 
+exports.findHoursWorkedPerSprint= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var sprints ={};
+      data.forEach((sprint)=>{
+        var workedHours = 0;
+        sprint.tasks.forEach((task)=>{
+          if(task.status == 'Completed'){
+            workedHours+=task.worked_hours
+          }
+        })
+        sprints[sprint.sprint_id] = workedHours
+      })
+      res.send(sprints)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
+
+
 
 
 
