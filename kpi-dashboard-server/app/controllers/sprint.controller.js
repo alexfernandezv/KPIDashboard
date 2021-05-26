@@ -141,12 +141,16 @@ exports.findHoursWorkedPerSprint= (req, res) => {
       var sprints ={};
       data.forEach((sprint)=>{
         var workedHours = 0;
+        var remainingHours = 0;
         sprint.tasks.forEach((task)=>{
           if(task.status == 'Completed'){
             workedHours+=task.worked_hours
           }
+          else{
+            remainingHours+=task.estimated_duration;
+          }
         })
-        sprints[sprint.sprint_id] = workedHours
+        sprints[sprint.sprint_id] = {workedHours: workedHours, remainingHours: remainingHours}
       })
       res.send(sprints)
     })

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormControlDirective } from '@angular/forms';
 import { TaskService } from 'src/app/services/task/task.service';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { ProjectService } from 'src/app/services/project/project.service';
@@ -29,9 +29,12 @@ export class SprintManagementComponent {
   sprintListFilter: SprintListFilter[] = [{label: 'All Sprints', value: 0}];
   selectedSprint = this.sprintListFilter[0].value;
   sprints: Sprint[];
-  workedHours: any;
+  workedAndRemainingHours: any;
   taskInfo: any;
+  dates: any = {};
   completedTasks: any;
+  date1: FormControl;
+  date2: FormControl;
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -59,18 +62,21 @@ export class SprintManagementComponent {
     this.sprintService.getAllSprintsByProjectId(this.authService.getLoggedUser().project_id).subscribe(data => {
       this.sprints = data;
       data.forEach(sprint => {
-        this.sprintListFilter.push({label: sprint.sprint_name, value: sprint.sprint_id})
+        this.sprintListFilter.push({label: "Sprint ".concat(sprint.sprint_id), value: sprint.sprint_id})
+        this.dates[sprint.sprint_id] = { start_date: new FormControl(new Date(sprint.start_date)), end_date: new FormControl(new Date(sprint.end_date))};
       });
     },error => {
       console.log(error);
     });
     this.sprintService.getWorkedHours(this.authService.getLoggedUser().project_id).subscribe(data => {
-      this.workedHours = data;
-      let totalHours = 0;
+      this.workedAndRemainingHours = data;
+      let totalHoursWorked = 0;
+      let totalHoursRemaining = 0;
       for( let v in data){
-        totalHours += data[v];
+        totalHoursWorked += data[v].workedHours;
+        totalHoursRemaining += data[v].remainingHours;
       }
-      this.workedHours[0] = totalHours;
+      this.workedAndRemainingHours[0] = {workedHours: totalHoursWorked,remainingHours : totalHoursRemaining};
     })
     this.sprintService.getTasks(this.authService.getLoggedUser().project_id).subscribe(data => {
      this.taskInfo = data;
@@ -88,6 +94,6 @@ export class SprintManagementComponent {
 
   selectSprint(event: Event) {
     this.selectedSprint = parseInt((event.target as HTMLSelectElement).value);
-    console.log(this.selectedSprint)
+    
   }
 }
