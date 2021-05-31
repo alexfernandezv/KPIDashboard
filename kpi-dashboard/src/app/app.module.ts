@@ -51,6 +51,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FilterMiniCardComponent } from './secured/filter-mini-card/filter-mini-card.component';
 import { SprintVelocityComponent } from './secured/dashboards/sprint-management/charts/sprint-velocity/sprint-velocity.component';
 import { SprintBurndownComponent } from './secured/dashboards/sprint-management/charts/sprint-burndown/sprint-burndown.component';
+import { SprintCompletedTasksPerDayComponent } from './secured/dashboards/sprint-management/charts/sprint-completed-tasks-per-day/sprint-completed-tasks-per-day.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import { SprintBurndownComponent } from './secured/dashboards/sprint-management/
     BugsPerRoleComponent,
     FilterMiniCardComponent,
     SprintVelocityComponent,
-    SprintBurndownComponent
+    SprintBurndownComponent,
+    SprintCompletedTasksPerDayComponent
   ],
   imports: [
     BrowserModule,

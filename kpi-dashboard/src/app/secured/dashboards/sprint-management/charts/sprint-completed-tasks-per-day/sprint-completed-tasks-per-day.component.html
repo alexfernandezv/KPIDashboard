@@ -1,0 +1,13 @@
+<div style="display: block;">
+  <canvas baseChart *ngIf="chartReady; else loading"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [plugins]="lineChartPlugins"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType">
+  </canvas>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

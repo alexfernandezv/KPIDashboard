@@ -76,14 +76,21 @@
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Sprint burn-down">
-           <app-sprint-burndown *ngIf="selectedSprint!=0; else select_sprint" [sprintId]="selectedSprint"></app-sprint-burndown>
-            <ng-template #select_sprint><h2>Select an Sprint to see the Burndown!</h2></ng-template>
+            <div *ngIf="!reloaded; else not_loaded">
+              <app-sprint-burndown *ngIf="selectedSprint!=0; else select_sprint" [sprintId]="selectedSprint"></app-sprint-burndown>
+              <ng-template #select_sprint><h2>Select an Sprint to see the Burndown!</h2></ng-template>
+            </div>
+            <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="4"
-        [rowspan]="( cardLayout | async )?.chart.rows">
+        [rowspan]="4">
           <app-card title="Completed Story Points">
-           
+            <div *ngIf="!reloaded; else not_loaded">
+            <app-sprint-completed-tasks-per-day *ngIf="selectedSprint!=0 && !reloaded; else select_sprint1" [sprintId]="selectedSprint"></app-sprint-completed-tasks-per-day>
+            <ng-template #select_sprint1><h2>Select an Sprint to see the Completed story points Chart!</h2></ng-template>
+          </div>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
           </app-card>
         </mat-grid-tile>
       </mat-grid-list>

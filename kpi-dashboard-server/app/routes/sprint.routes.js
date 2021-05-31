@@ -8,7 +8,7 @@ module.exports = app => {
   router.get("/sprints/project/:id/hours_worked", sprint.findHoursWorkedPerSprint);
   router.get("/sprints/project/:id/tasks", sprint.findTasksPerSprint);
   router.get("/sprints/project/:id/:sprintid/burndown", sprint.getBurndown);
-  
+  router.get("/sprints/project/:id/:sprintid/story_points", sprint.getCompletedStoryPoints);
   
   
   app.use('/api/', router);

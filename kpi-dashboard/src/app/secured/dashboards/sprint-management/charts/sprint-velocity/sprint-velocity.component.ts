@@ -17,7 +17,7 @@ export class SprintVelocityComponent implements OnInit {
       yAxes: [{
          scaleLabel: {
             display: true,
-            labelString: 'Hours'
+            labelString: 'Tasks'
          },
          ticks: {
           stepSize: 1,
@@ -31,8 +31,8 @@ export class SprintVelocityComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Estimated Hours' },
-    { data: [], label: 'Completed Hours' }
+    { data: [], label: 'Estimated Tasks' },
+    { data: [], label: 'Completed Tasks' }
   ];
   public chartReady : boolean = false;
   constructor(private sprintService: SprintService, private authService: AuthenticationService) { }

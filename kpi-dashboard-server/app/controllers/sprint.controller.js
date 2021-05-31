@@ -234,6 +234,39 @@ exports.getBurndown= (req, res) => {
     });
 };
 
+exports.getCompletedStoryPoints= (req, res) => {
+  const id = req.params.id;
+  const sprintid = req.params.sprintid;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` }, sprint_id: { [Op.like]: `%${sprintid}%` },  } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var obj ={};
+      data.forEach((sprint)=>{
+        var sprintDays= Math.round((new Date(sprint.end_date) - new Date(sprint.start_date)) / (24 * 60 * 60 * 1000));
+        var totalTasks = 0;
+        var tasksCompleted1 = 0;
+        var tasksCompleted2 = 0;
+        var tasksCompleted3 = 0;
+        for(let i=0;i<=sprintDays;i++){
+          obj[i] = 0;
+          sprint.tasks.forEach((task)=>{
+            let taskEndDay = Math.round((new Date(task.end_date) - new Date(sprint.start_date)) / (24 * 60 * 60 * 1000));
+            if(task.status == 'Completed' && taskEndDay==i){
+             obj[i] = obj[i] + 1;
+            }
+          })
+
+        }
+      })
+      res.send(obj)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
+
 
 
 
