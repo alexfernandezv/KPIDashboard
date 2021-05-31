@@ -22,7 +22,12 @@ export class SprintService {
   getWorkedHours(id): Observable<any>{
     return this.http.get(`${baseUrl}/project/${id}/hours_worked`);
   }
+
   getTasks(id): Observable<any>{
     return this.http.get(`${baseUrl}/project/${id}/tasks`);
+  }
+
+  getBurndownPoints(idProject, idSprint): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${idProject}/${idSprint}/burndown`);
   }
 }

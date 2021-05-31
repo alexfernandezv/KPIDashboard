@@ -13,6 +13,14 @@ export class PlannedVsUtilizedComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: { //you're missing this
+      yAxes: [{
+         scaleLabel: {
+            display: true,
+            labelString: 'Hours'
+         }
+      }]
+   }
   };
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';

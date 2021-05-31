@@ -13,21 +13,26 @@ export class SprintVelocityComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales : {
+    scales: { 
       yAxes: [{
-         ticks:{
-           min: 1,
-         }
+         scaleLabel: {
+            display: true,
+            labelString: 'Hours'
+         },
+         ticks: {
+          stepSize: 1,
+          beginAtZero: true
+        }
       }]
-    }
+   }
   };
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Estimated' },
-    { data: [], label: 'Completed' }
+    { data: [], label: 'Estimated Hours' },
+    { data: [], label: 'Completed Hours' }
   ];
   public chartReady : boolean = false;
   constructor(private sprintService: SprintService, private authService: AuthenticationService) { }

@@ -35,6 +35,7 @@ export class SprintManagementComponent {
   completedTasks: any;
   date1: FormControl;
   date2: FormControl;
+  reloaded: boolean = false;
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -93,7 +94,9 @@ export class SprintManagementComponent {
   
 
   selectSprint(event: Event) {
-    this.selectedSprint = parseInt((event.target as HTMLSelectElement).value);
-    
+    this.reloaded = true;
+    setTimeout(() => {
+      this.reloaded = false;
+    },1000)
   }
 }

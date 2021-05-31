@@ -14,6 +14,18 @@ export class DoneVsPlannedComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: { //you're missing this
+      yAxes: [{
+         scaleLabel: {
+            display: true,
+            labelString: 'Tasks'
+         },
+         ticks: {
+          stepSize: 1,
+          beginAtZero: true
+        }
+      }]
+   }
   };
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';

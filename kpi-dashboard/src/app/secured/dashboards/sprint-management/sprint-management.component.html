@@ -11,31 +11,31 @@
             <app-filter-mini-card title="Filter by Sprint">
               <mat-form-field appearance="fill">
                 <mat-label>Sprint</mat-label>
-                <mat-select [(value)]="selectedSprint">
-                  <mat-option [value]="option.value" *ngFor="let option of sprintListFilter">{{ option.label }}</mat-option>
+                <mat-select [(value)]="selectedSprint" (selectionChange)="selectSprint($event.value)">
+                  <mat-option [value]="option.value"  *ngFor="let option of sprintListFilter">{{ option.label }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </app-filter-mini-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="workedAndRemainingHours; else not_loaded" title="Hours worked per Sprint" [value]="workedAndRemainingHours[selectedSprint].workedHours" color="green" icon="schedule"></app-mini-card>
+          <app-mini-card *ngIf="workedAndRemainingHours && !reloaded; else not_loaded" title="Hours worked per Sprint" [value]="workedAndRemainingHours[selectedSprint].workedHours" color="green" icon="schedule"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="taskInfo; else not_loaded" title="Planned tasks per Sprint" [value]="taskInfo[selectedSprint].totalTasks" color="black" icon="task"></app-mini-card>
+          <app-mini-card *ngIf="taskInfo && !reloaded; else not_loaded" title="Planned tasks per Sprint" [value]="taskInfo[selectedSprint].totalTasks" color="black" icon="task"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="taskInfo; else not_loaded" title="Completed tasks per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="green" icon="task"></app-mini-card>
+          <app-mini-card *ngIf="taskInfo && !reloaded; else not_loaded" title="Completed tasks per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="green" icon="task"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
         <app-filter-mini-card  *ngIf="selectedSprint != 0" title="Sprint Dates">
-          <div>
+          <div *ngIf="!reloaded; else not_loaded">
             <mat-form-field style="width:40%; margin-right: 9px;" appearance="fill">
               <mat-label>Start date</mat-label>
               <input matInput [matDatepicker]="dp3" [formControl]="dates[selectedSprint].start_date" [disabled]="true">
@@ -49,19 +49,19 @@
               <mat-datepicker #dp4 disabled="true"></mat-datepicker>
             </mat-form-field>
           </div>
-          
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </app-filter-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="workedAndRemainingHours; else not_loaded" title="Remaining hours to complete Sprint" [value]="workedAndRemainingHours[selectedSprint].remainingHours" color="red" icon="pending_actions"></app-mini-card>
+          <app-mini-card *ngIf="workedAndRemainingHours && !reloaded; else not_loaded" title="Remaining hours to complete Sprint" [value]="workedAndRemainingHours[selectedSprint].remainingHours" color="red" icon="pending_actions"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
        
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="taskInfo; else not_loaded" title="Changes made per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="black" icon="change_circle"></app-mini-card>
+          <app-mini-card *ngIf="taskInfo && !reloaded; else not_loaded" title="Changes made per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="black" icon="change_circle"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
 
@@ -76,18 +76,13 @@
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Sprint burn-down">
-           
+           <app-sprint-burndown *ngIf="selectedSprint!=0; else select_sprint" [sprintId]="selectedSprint"></app-sprint-burndown>
+            <ng-template #select_sprint><h2>Select an Sprint to see the Burndown!</h2></ng-template>
           </app-card>
         </mat-grid-tile>
-        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        <mat-grid-tile  [colspan]="4"
         [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Planned hours vs Needed hours  (per role)">
-           
-          </app-card>
-        </mat-grid-tile>
-        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
-        [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Bugs per role">
+          <app-card title="Completed Story Points">
            
           </app-card>
         </mat-grid-tile>

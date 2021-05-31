@@ -187,6 +187,53 @@ exports.findTasksPerSprint= (req, res) => {
     });
 };
 
+exports.getBurndown= (req, res) => {
+  const id = req.params.id;
+  const sprintid = req.params.sprintid;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` }, sprint_id: { [Op.like]: `%${sprintid}%` },  } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var obj ={};
+      data.forEach((sprint)=>{
+        var sprintDays= Math.round((new Date(sprint.end_date) - new Date(sprint.start_date)) / (24 * 60 * 60 * 1000));
+        var totalTasks = 0;
+        var date1 = new Date(sprint.start_date);
+        date1.setDate(date1.getDate() +  Math.round((sprintDays/3)))
+        var date2 = new Date(date1)
+        date2.setDate(date2.getDate() +  Math.round((sprintDays/3)))
+        var date3 = new Date(date2)
+        date3.setDate(date3.getDate() +  Math.round((sprintDays/3)))
+        
+        var tasksCompleted1 = 0;
+        var tasksCompleted2 = 0;
+        var tasksCompleted3 = 0;
+        sprint.tasks.forEach((task)=>{
+          
+          if(task.status == 'Completed'){
+            if(new Date(task.end_date) <= date1){
+              tasksCompleted1 += 1;
+            }
+            else if(new Date(task.end_date) <= date2){
+              tasksCompleted2 += 1;
+            }
+            else if(new Date(task.end_date) <= date3){
+              tasksCompleted3 += 1;
+            }
+          }
+          totalTasks += 1;
+        })
+        obj = {sprintDays: sprintDays, totalTasks: totalTasks, tasksCompleted1: tasksCompleted1, 
+          tasksCompleted2: tasksCompleted2, tasksCompleted3: tasksCompleted3}
+      })
+      res.send(obj)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
+
 
 
 
