@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div>
+  <div *ngIf="workedAndRemainingHours; else loading">
     <div class="grid-container">
       <h1 class="mat-h1">Sprint Management Dashboard</h1>
       <button mat-stroked-button class="export" color="primary">Export</button>
@@ -49,7 +49,7 @@
               <mat-datepicker #dp4 disabled="true"></mat-datepicker>
             </mat-form-field>
           </div>
-          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
+          <ng-template #not_loaded><mat-spinner style="margin-top: 0px;" diameter="50"></mat-spinner></ng-template>
         </app-filter-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
@@ -98,7 +98,7 @@
       </mat-grid-list>
     </div>  
   </div>
-  <ng-template #not_loaded>
+  <ng-template #loading>
     <mat-spinner></mat-spinner>
   </ng-template>
 </div>

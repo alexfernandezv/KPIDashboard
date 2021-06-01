@@ -35,4 +35,7 @@ export class ProjectService {
   getProjectRoles(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}/user_roles`);
   }
+  getProjectEfectiveness(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/efectiveness_values`);
+  }
 }

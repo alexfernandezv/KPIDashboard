@@ -1,8 +1,8 @@
 <mat-card class="dashboard-card">
-    <div *ngIf="value; else not_loaded">
+    <div *ngIf="value!=undefined; else not_loaded">
         <mat-card-header class="card-header">
             <mat-card-title>
-                <h1 *ngIf="!percentage" class="value-text">{{value}}</h1>
+                <h1 *ngIf="!percentage" class="value-text">{{value}} <h2 style="display: inline-flex;">{{label}}</h2></h1>
                 <h1 *ngIf="percentage" class="value-text">{{value}} %</h1>
             </mat-card-title>
             <div mat-card-avatar class="card-icon">

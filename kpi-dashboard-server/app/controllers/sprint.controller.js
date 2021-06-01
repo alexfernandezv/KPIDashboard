@@ -291,6 +291,31 @@ exports.findChangesPerSprint= (req, res) => {
       });
     });
 };
-
+exports.computeEfectiveness= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  var tasks = []
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var totalTasks = 0;
+      var leadTimeAux = 0;
+      var cycleTimeAux = 0;
+      var totalWorkedHours = 0;
+      var totalPlannedHours = 0;
+      data.forEach((sprint)=>{
+        sprint.tasks.forEach( task =>{
+          if(task.status == "Completed"){
+            totalTasks += 1;
+            leadTimeAux +=  Math.round((new Date(task.end_date) - new Date(task.creation_date)) /  3600000);
+            cycleTimeAux += Math.round((new Date(task.end_date) - new Date(task.start_date)) /  3600000);
+            totalWorkedHours += task.worked_hours;
+          }
+          totalPlannedHours += task.estimated_duration;
+        }
+      )
+    })
+    res.send({leadTime: Math.round(leadTimeAux/totalTasks), cycleTime: Math.round(cycleTimeAux/totalTasks), accomplishmentRatio:  Math.round((totalWorkedHours/totalPlannedHours)*100)})
+    });
+};
 
 

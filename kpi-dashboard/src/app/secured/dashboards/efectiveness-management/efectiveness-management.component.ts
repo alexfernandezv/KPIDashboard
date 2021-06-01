@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { TaskService } from 'src/app/services/task/task.service';
+import { UsersService } from 'src/app/services/users';
+import { ProjectService } from 'src/app/services/project/project.service';
+import { SprintService } from 'src/app/services/sprint/sprint.service';
+import { AuthenticationService } from 'src/app/services/authentication';
+
 
 @Component({
   selector: 'app-efectiveness-management',
@@ -8,26 +14,36 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./efectiveness-management.component.css']
 })
 export class EfectivenessManagementComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  
+  cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
+        return {
+          columns: 1,
+          miniCard: { cols: 1, rows: 1 },
+          chart: { cols: 1, rows: 2 },
+          table: { cols: 1, rows: 4 },
+        };
       }
-
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
+     return {
+      columns: 4,
+      miniCard: { cols: 2, rows: 1 },
+      chart: { cols: 2, rows: 3 },
+     }
     })
   );
+  leadTime: number;
+  cycleTime: number;
+  accomplishmentRatio: number;
+  constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService, 
+    private sprintService: SprintService, private projectService: ProjectService, 
+    private authService: AuthenticationService, private userService: UsersService) {}
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(){
+    this.projectService.getProjectEfectiveness(this.authService.getLoggedUser().project_id).subscribe(data => {
+      this.leadTime = data.leadTime;
+      this.cycleTime = data.cycleTime;
+      this.accomplishmentRatio = data.accomplishmentRatio;
+    })
+  }
 }

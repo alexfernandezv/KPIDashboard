@@ -8,8 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MiniCardComponent implements OnInit {
   @Input() icon: string;
   @Input() title: string;
-  @Input() value: number;
+  @Input() value: number = undefined;
   @Input() color: string;
+  @Input() label: string = undefined;
   @Input() percentage: boolean = false;
   constructor() { }
 
