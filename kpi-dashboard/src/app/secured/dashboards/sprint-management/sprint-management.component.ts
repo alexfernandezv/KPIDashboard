@@ -36,6 +36,7 @@ export class SprintManagementComponent {
   date1: FormControl;
   date2: FormControl;
   reloaded: boolean = false;
+  changesPerSprint : any;
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -74,8 +75,19 @@ export class SprintManagementComponent {
       let totalHoursWorked = 0;
       let totalHoursRemaining = 0;
       for( let v in data){
-        totalHoursWorked += data[v].workedHours;
-        totalHoursRemaining += data[v].remainingHours;
+        if(data[v].workedHours == 0){
+          this.workedAndRemainingHours[v].workedHours = "0";
+        }
+        else{
+          totalHoursWorked += data[v].workedHours;
+        }
+
+        if(data[v].remainingHours == 0){
+          this.workedAndRemainingHours[v].remainingHours = "0";
+        }
+        else{
+          totalHoursRemaining += data[v].remainingHours;
+        }
       }
       this.workedAndRemainingHours[0] = {workedHours: totalHoursWorked,remainingHours : totalHoursRemaining};
     })
@@ -84,16 +96,42 @@ export class SprintManagementComponent {
      let totalPlanned = 0;
      let totalCompleted = 0;
       for( let v in data){
-        totalPlanned += data[v].totalTasks;
-        totalCompleted += data[v].completedTasks;
+        if(data[v].totalTasks == 0){
+          this.taskInfo[v].totalTasks = "0";
+        }
+        else{
+          totalPlanned += data[v].totalTasks;
+        }
+
+        if(data[v].completedTasks == 0){
+          this.taskInfo[v].completedTasks = "0";
+        }
+        else{
+          totalCompleted += data[v].completedTasks;
+        }
       }
       this.taskInfo[0]= {"totalTasks": totalPlanned, "completedTasks": totalCompleted};
       
     })
+    this.sprintService.getChanges(this.authService.getLoggedUser().project_id).subscribe(data => {
+      this.changesPerSprint = data;
+      let totalChanges = 0;
+       for( let v in data){
+         if(data[v].addedTasks == 0){
+           this.changesPerSprint[v].addedTasks = "0";
+         }
+         else{
+          totalChanges += data[v].addedTasks;
+         }
+         
+       }
+       this.changesPerSprint[0]= {addedTasks: totalChanges};
+     })
   }
   
 
   selectSprint(event: Event) {
+
     this.reloaded = true;
     setTimeout(() => {
       this.reloaded = false;

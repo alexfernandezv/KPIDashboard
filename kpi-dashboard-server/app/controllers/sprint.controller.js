@@ -267,7 +267,30 @@ exports.getCompletedStoryPoints= (req, res) => {
     });
 };
 
-
+exports.findChangesPerSprint= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var sprints ={};
+      data.forEach((sprint)=>{
+        var addedTasks = 0;
+        var sprintStartDate = new Date(sprint.start_date)
+        sprint.tasks.forEach((task)=>{
+          if(task.creation_date>sprint.start_date){
+            addedTasks += 1;
+          }
+        })
+        sprints[sprint.sprint_id] = {addedTasks: addedTasks}
+      })
+      res.send(sprints)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
 
 
 

@@ -27,6 +27,10 @@ export class SprintService {
     return this.http.get(`${baseUrl}/project/${id}/tasks`);
   }
 
+  getChanges(id): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${id}/changes`);
+  }
+
   getBurndownPoints(idProject, idSprint): Observable<any>{
     return this.http.get(`${baseUrl}/project/${idProject}/${idSprint}/burndown`);
   }

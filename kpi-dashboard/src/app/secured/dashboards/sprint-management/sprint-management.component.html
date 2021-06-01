@@ -61,11 +61,12 @@
        
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="taskInfo && !reloaded; else not_loaded" title="Changes made per Sprint" [value]="taskInfo[selectedSprint].completedTasks" color="black" icon="change_circle"></app-mini-card>
+          
+          <app-mini-card *ngIf="changesPerSprint && !reloaded; else not_loaded" title="Changes made per Sprint" [value]="changesPerSprint[selectedSprint].addedTasks" color="black" icon="change_circle"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
-        </mat-grid-tile>
-
         
+          
+        </mat-grid-tile>
         <!--Charts-->
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
           [rowspan]="( cardLayout | async )?.chart.rows">
@@ -83,8 +84,9 @@
             <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
           </app-card>
         </mat-grid-tile>
-        <mat-grid-tile  [colspan]="4"
-        [rowspan]="4">
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Completed Story Points">
             <div *ngIf="!reloaded; else not_loaded">
             <app-sprint-completed-tasks-per-day *ngIf="selectedSprint!=0 && !reloaded; else select_sprint1" [sprintId]="selectedSprint"></app-sprint-completed-tasks-per-day>
