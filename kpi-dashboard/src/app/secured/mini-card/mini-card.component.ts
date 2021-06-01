@@ -14,6 +14,9 @@ export class MiniCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(this.value == undefined){
+      this.value = 0;
+    }
   }
 
 }

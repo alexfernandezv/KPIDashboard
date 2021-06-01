@@ -18,4 +18,24 @@ export class SprintService {
   getSprintById(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}`);
   }
+
+  getWorkedHours(id): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${id}/hours_worked`);
+  }
+
+  getTasks(id): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${id}/tasks`);
+  }
+
+  getChanges(id): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${id}/changes`);
+  }
+
+  getBurndownPoints(idProject, idSprint): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${idProject}/${idSprint}/burndown`);
+  }
+
+  getCompletedStoryPoints(idProject, idSprint): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${idProject}/${idSprint}/story_points`);
+  }
 }

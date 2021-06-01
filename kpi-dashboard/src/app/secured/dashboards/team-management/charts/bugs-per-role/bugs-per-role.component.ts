@@ -13,6 +13,18 @@ export class BugsPerRoleComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: { 
+      yAxes: [{
+         scaleLabel: {
+            display: true,
+            labelString: 'Bugs'
+         },
+         ticks: {
+          stepSize: 1,
+          beginAtZero: true
+        }
+      }]
+   }
   };
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';
