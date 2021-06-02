@@ -8,7 +8,7 @@
         <!--Mini Cards-->
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Task completion ratio" [value]="taskCompletionRatio" color="black" icon="task" [percentage]="true"></app-mini-card>
+          <app-mini-card title="Task completion ratio" [value]="taskCompletionRatio" color="green" icon="task" [percentage]="true"></app-mini-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
@@ -16,11 +16,11 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Estimated hours" [value]="estimatedHours" color="black" icon="schedule"></app-mini-card>
+          <app-mini-card title="Estimated hours" [value]="estimatedHours" color="orange" icon="schedule"></app-mini-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Needed hours" [value]="neededHours" color="black" icon="hourglass_top"></app-mini-card>
+          <app-mini-card title="Needed hours" [value]="neededHours" color="red" icon="hourglass_top"></app-mini-card>
         </mat-grid-tile>
 
         

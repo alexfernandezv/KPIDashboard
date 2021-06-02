@@ -38,4 +38,7 @@ export class ProjectService {
   getProjectEfectiveness(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}/efectiveness_values`);
   }
+  getProjectBugs(id): Observable<any>{
+    return this.http.get(`${baseUrl}/${id}/bugs`);
+  }
 }

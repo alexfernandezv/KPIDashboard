@@ -19,12 +19,12 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card  title="Cycle Time" [value]="cycleTime" label="hours" color="black" icon="hourglass_bottom"></app-mini-card>
+          <app-mini-card  title="Cycle Time" [value]="cycleTime" label="hours" color="orange" icon="hourglass_bottom"></app-mini-card>
         </mat-grid-tile>
         
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card  title="Accomplishment Ratio" [value]="accomplishmentRatio" [percentage]="true" color="black" icon="checklist"></app-mini-card>
+          <app-mini-card  title="Accomplishment Ratio" [value]="accomplishmentRatio" [percentage]="true" color="green" icon="checklist"></app-mini-card>
         </mat-grid-tile>
       </mat-grid-list>
     </div>  

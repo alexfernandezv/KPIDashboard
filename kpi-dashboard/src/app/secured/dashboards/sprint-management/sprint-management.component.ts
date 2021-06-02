@@ -37,7 +37,6 @@ export class SprintManagementComponent {
   date2: FormControl;
   reloaded: boolean = false;
   changesPerSprint : any;
-  /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {

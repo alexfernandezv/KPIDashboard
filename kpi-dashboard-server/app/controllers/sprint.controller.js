@@ -291,6 +291,7 @@ exports.findChangesPerSprint= (req, res) => {
       });
     });
 };
+
 exports.computeEfectiveness= (req, res) => {
   const id = req.params.id;
   var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
@@ -318,4 +319,27 @@ exports.computeEfectiveness= (req, res) => {
     });
 };
 
-
+exports.getBugData= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  var tasks = []
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var bugsReported = 0;
+      var bugsSolved = 0;
+      var bugFixTime = 0;
+      data.forEach((sprint)=>{
+        sprint.tasks.forEach( task =>{
+          if(task.type == "Bug"){
+            if(task.status == "Completed"){
+              bugFixTime += task.worked_hours;
+              bugsSolved += 1;
+            }
+            bugsReported += 1;
+          }
+        }
+      )
+    })
+    res.send({bugsReported: bugsReported, bugsSolved:  bugsSolved, bugFixTime: (bugFixTime/bugsSolved).toFixed(2)})
+    });
+};
