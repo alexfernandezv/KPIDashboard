@@ -20,7 +20,7 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card *ngIf="bugFixTime; else not_loaded" title="Average bugfix time (hours)" [value]="bugFixTime" color="green" icon="task"></app-mini-card>
+          <app-mini-card *ngIf="bugFixTime; else not_loaded" title="Average bugfix time (in hours)" [value]="bugFixTime" color="green" icon="task"></app-mini-card>
           <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
@@ -29,13 +29,13 @@
         <mat-grid-tile  [colspan]="3"
           [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Bugs per Sprint">
-            
+            <app-bugs-per-sprint></app-bugs-per-sprint>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
           <app-card title="Bugs per role">
-            
+            <app-bugs-per-role-pie></app-bugs-per-role-pie>
           </app-card>
         </mat-grid-tile>
       </mat-grid-list>

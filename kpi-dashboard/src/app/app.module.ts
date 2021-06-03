@@ -52,6 +52,8 @@ import { FilterMiniCardComponent } from './secured/filter-mini-card/filter-mini-
 import { SprintVelocityComponent } from './secured/dashboards/sprint-management/charts/sprint-velocity/sprint-velocity.component';
 import { SprintBurndownComponent } from './secured/dashboards/sprint-management/charts/sprint-burndown/sprint-burndown.component';
 import { SprintCompletedTasksPerDayComponent } from './secured/dashboards/sprint-management/charts/sprint-completed-tasks-per-day/sprint-completed-tasks-per-day.component';
+import { BugsPerSprintComponent } from './secured/dashboards/bug-management/charts/bugs-per-sprint/bugs-per-sprint.component';
+import { BugsPerRolePieComponent } from './secured/dashboards/bug-management/charts/bugs-per-role-pie/bugs-per-role-pie.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +78,9 @@ import { SprintCompletedTasksPerDayComponent } from './secured/dashboards/sprint
     FilterMiniCardComponent,
     SprintVelocityComponent,
     SprintBurndownComponent,
-    SprintCompletedTasksPerDayComponent
+    SprintCompletedTasksPerDayComponent,
+    BugsPerSprintComponent,
+    BugsPerRolePieComponent
   ],
   imports: [
     BrowserModule,

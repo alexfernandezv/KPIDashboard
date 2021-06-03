@@ -38,4 +38,7 @@ export class SprintService {
   getCompletedStoryPoints(idProject, idSprint): Observable<any>{
     return this.http.get(`${baseUrl}/project/${idProject}/${idSprint}/story_points`);
   }
+  getBugs(idProject): Observable<any>{
+    return this.http.get(`${baseUrl}/project/${idProject}/bugs`);
+  }
 }

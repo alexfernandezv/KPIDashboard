@@ -10,6 +10,7 @@ module.exports = app => {
   router.get("/sprints/project/:id/changes", sprint.findChangesPerSprint);
   router.get("/sprints/project/:id/:sprintid/burndown", sprint.getBurndown);
   router.get("/sprints/project/:id/:sprintid/story_points", sprint.getCompletedStoryPoints);
+  router.get("/sprints/project/:id/bugs", sprint.findBugsPerSprint);
   
   
   app.use('/api/', router);

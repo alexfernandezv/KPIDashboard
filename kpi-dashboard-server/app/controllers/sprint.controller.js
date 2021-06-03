@@ -343,3 +343,27 @@ exports.getBugData= (req, res) => {
     res.send({bugsReported: bugsReported, bugsSolved:  bugsSolved, bugFixTime: (bugFixTime/bugsSolved).toFixed(2)})
     });
 };
+
+exports.findBugsPerSprint= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var sprints ={};
+      data.forEach((sprint)=>{
+        var bugs = 0;
+        sprint.tasks.forEach((task)=>{
+          if(task.type == "Bug"){
+            bugs += 1;
+          }
+        })
+        sprints[sprint.sprint_id] = {bugs: bugs}
+      })
+      res.send(sprints)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};
