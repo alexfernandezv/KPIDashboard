@@ -6,7 +6,8 @@ import { UsersService } from 'src/app/services/users';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { AuthenticationService } from 'src/app/services/authentication';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-efectiveness-management',
@@ -45,5 +46,16 @@ export class EfectivenessManagementComponent {
       this.cycleTime = data.cycleTime;
       this.accomplishmentRatio = data.accomplishmentRatio;
     })
+  }
+
+  exportAsPDF(id:string){
+    let data = document.getElementById(id);  
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); 
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+      pdf.save('Efectiveness Management Dashboard.pdf');   
+    }); 
   }
 }

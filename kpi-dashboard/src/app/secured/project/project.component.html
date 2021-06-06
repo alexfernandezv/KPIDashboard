@@ -5,11 +5,12 @@
     <div class="row">
       <div class="column">
         <h2>Team Members</h2>
-        <div class="members">
-          <div class="member" *ngFor="let member of members; let i=index">
-            <mat-icon  [matTooltip]="roles[i]" matTooltipPosition="left" class="member">person</mat-icon>{{member}}
-          </div>
-        </div>
+        <mat-grid-list cols="3" rowHeight="2:1">
+          <mat-grid-tile *ngFor="let member of members; let i=index">
+            <mat-icon  mat-list-icon [matTooltip]="roles[i]" matTooltipPosition="left">person</mat-icon>{{member}}
+          </mat-grid-tile>
+        </mat-grid-list>
+        
       </div>
       <div class="column">
         <br/>

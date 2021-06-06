@@ -4,7 +4,7 @@
           {{title}}
           
           
-            <mat-icon class="more-button" color="white" matTooltip="hola" matTooltipPosition="right">info</mat-icon>
+            <mat-icon *ngIf="tooltip != ''"class="more-button" color="white" [matTooltip]="tooltip" matPosition="right">info</mat-icon>
          
       </mat-card-title>
   </mat-card-header>

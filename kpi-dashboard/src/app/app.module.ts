@@ -54,6 +54,7 @@ import { SprintBurndownComponent } from './secured/dashboards/sprint-management/
 import { SprintCompletedTasksPerDayComponent } from './secured/dashboards/sprint-management/charts/sprint-completed-tasks-per-day/sprint-completed-tasks-per-day.component';
 import { BugsPerSprintComponent } from './secured/dashboards/bug-management/charts/bugs-per-sprint/bugs-per-sprint.component';
 import { BugsPerRolePieComponent } from './secured/dashboards/bug-management/charts/bugs-per-role-pie/bugs-per-role-pie.component';
+import {MatList, MatListModule} from '@angular/material/list'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,7 +107,7 @@ import { BugsPerRolePieComponent } from './secured/dashboards/bug-management/cha
     MatMenuModule,
     LayoutModule,
     ChartsModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [CookieService, MatSnackBar, AuthGuard,
     AuthenticationService,

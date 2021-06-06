@@ -3,11 +3,14 @@
         <mat-card-header class="card-header">
             <mat-card-title>
                 <h1 *ngIf="!percentage" class="value-text">{{value}} <h2 style="display: inline-flex;">{{label}}</h2></h1>
-                <h1 *ngIf="percentage" class="value-text">{{value}} %</h1>
+                
             </mat-card-title>
             <div mat-card-avatar class="card-icon">
                 <mat-icon [ngStyle]="{'color': color}" class="avatar-icon">{{icon}}</mat-icon>
             </div>
+            <h1 *ngIf="percentage" class="value-text">{{value}} %</h1>
+
+            <mat-icon *ngIf="tooltip!=''"class="more-button" color="white" [matTooltip]="tooltip" matPosition="right">info</mat-icon>
         </mat-card-header>
         <h3 class="title-text">{{title}}</h3>
         <!-- <p class="difference-text">

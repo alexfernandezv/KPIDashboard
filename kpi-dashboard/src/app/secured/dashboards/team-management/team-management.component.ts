@@ -12,7 +12,8 @@ import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { Observable, Subject } from 'rxjs';
 import { UsersService } from 'src/app/services/users';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-team-management',
   templateUrl: './team-management.component.html',
@@ -87,5 +88,14 @@ export class TeamManagementComponent implements OnInit{
       this.roles = data.roles;
     })
   }
- 
+  exportAsPDF(id:string){
+    let data = document.getElementById(id);  
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); 
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+      pdf.save('Team Management Dashboard.pdf');   
+    }); 
+  }
 }

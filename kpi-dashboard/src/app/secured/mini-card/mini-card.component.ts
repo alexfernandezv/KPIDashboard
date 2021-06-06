@@ -12,6 +12,7 @@ export class MiniCardComponent implements OnInit {
   @Input() color: string;
   @Input() label: string = undefined;
   @Input() percentage: boolean = false;
+  @Input() tooltip: string = "";
   constructor() { }
 
   ngOnInit(): void {

@@ -8,7 +8,8 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { UsersService } from 'src/app/services/users';
 import { Sprint } from 'src/app/models/sprint.model';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 interface SprintListFilter {
   label: string;
   value: number;
@@ -110,5 +111,16 @@ export class SprintManagementComponent {
     setTimeout(() => {
       this.reloaded = false;
     },1000)
+  }
+
+  exportAsPDF(id:string){
+    let data = document.getElementById(id);  
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); 
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+      pdf.save('Sprint Management Dashboard.pdf');   
+    }); 
   }
 }
