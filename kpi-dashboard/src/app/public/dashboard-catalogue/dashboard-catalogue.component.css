@@ -14,11 +14,7 @@ h1{
 h2{
   margin-bottom: 50px;
 }
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+
 
 .overlay {
   position: absolute;
@@ -53,4 +49,10 @@ h2{
 }
 .low{
   margin-top: 300px !important;
+}
+.matTooltip{
+  font-size: 50px !important;
+}
+img{
+  width:300px;
 }

@@ -18,7 +18,10 @@
         <p style="font-size: 13px;">Project Name</p>
         <h1 class="project_name">{{project.project_name}}</h1>
         <br/>
-        <a mat-raised-button href="https://www.jira.com" target="_blank" >Jira Board link</a>
+        <a mat-raised-button href="https://www.jira.com" target="_blank"><mat-icon style="display: inline; margin-right:5px;">link</mat-icon>Jira Scrum Board link</a>
+        <br/>
+        <br/>
+        <button mat-raised-button color="primary" [routerLink]="['/dashboards']" >Go to Dashboards</button>
         <br/>
         <br/>
         <br/>
@@ -54,7 +57,9 @@
         <mat-datepicker #dp4 disabled="true"></mat-datepicker>
       </mat-form-field>
     </div>
-  </div>
+  
+    
+</div>
   <ng-template #not_loaded>
     <mat-spinner></mat-spinner>
   </ng-template>
