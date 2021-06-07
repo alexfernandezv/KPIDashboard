@@ -3,6 +3,9 @@
   <div *ngIf="workedAndRemainingHours; else loading">
     <div id="exportable" class="grid-container">
       <h1 class="mat-h1">Sprint Management Dashboard</h1>
+      <button mat-mini-fab [routerLink]="['/dashboards']" class="back" color="primary" #tooltip="matTooltip" matTooltip="Go back">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       <button mat-stroked-button class="export" color="primary" (click)="exportAsPDF('exportable');">Export as PDF</button>
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">
         <!--Mini Cards-->
