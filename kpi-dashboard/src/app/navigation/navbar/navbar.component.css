@@ -6,9 +6,7 @@
 a{
   font-size: 16px;
 }
-a:hover{
-  background-color:darkviolet;
-}
+
 
 .active-link{
   color: sandybrown;
