@@ -8,6 +8,7 @@ import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { AuthenticationService } from 'src/app/services/authentication';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-efectiveness-management',
@@ -37,18 +38,26 @@ export class EfectivenessManagementComponent {
   cycleTime: number;
   accomplishmentRatio: number;
   constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService, 
+    private _snackBar: MatSnackBar,
     private sprintService: SprintService, private projectService: ProjectService, 
     private authService: AuthenticationService, private userService: UsersService) {}
 
   ngOnInit(){
+    this._snackBar.open("Loading Dashboard...", "", {
+      duration: 3000
+    });
     this.projectService.getProjectEfectiveness(this.authService.getLoggedUser().project_id).subscribe(data => {
       this.leadTime = data.leadTime;
       this.cycleTime = data.cycleTime;
       this.accomplishmentRatio = data.accomplishmentRatio;
+      this._snackBar.dismiss();
     })
   }
 
   exportAsPDF(id:string){
+    this._snackBar.open("Downloading PDF...", "", {
+      duration: 3000
+    });
     let data = document.getElementById(id);  
     html2canvas(data).then(canvas => {
       const contentDataURL = canvas.toDataURL('image/png')  
@@ -56,6 +65,8 @@ export class EfectivenessManagementComponent {
       // let pdf = new jspdf('p', 'cm', 'a4'); 
       pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
       pdf.save('Efectiveness Management Dashboard.pdf');   
+      this._snackBar.dismiss();
     }); 
+    
   }
 }

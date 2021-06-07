@@ -14,8 +14,29 @@ h1{
 h2{
   margin-bottom: 50px;
 }
-
-
+.card_content{
+  width: 50%;
+  display: inline-flex;
+  margin-top: 20px !important;
+  font-size: 15px;
+  justify-content: center;
+  text-align: left;
+}
+.go{
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+}
+mat-card{
+  width: 80%;
+  height: 80%;
+}
+mat-card:hover{
+  background-color: whitesmoke;
+}
+.go:hover{
+  background-color: wheat;
+}
 .overlay {
   position: absolute;
   top: 0;
@@ -55,4 +76,20 @@ h2{
 }
 img{
   width:300px;
+}
+.scrum-image {
+  background-image: url('../../../assets/images/scrum-image.jpg');
+  background-size: cover;
+}
+.sprint-image {
+  background-image: url('../../../assets/images/sprint-image.png');
+  background-size: cover;
+}
+.efectiveness-image {
+  background-image: url('../../../assets/images/efectiveness-image.png');
+  background-size: cover;
+}
+.bug-image {
+  background-image: url('../../../assets/images/bug-image.png');
+  background-size: cover;
 }

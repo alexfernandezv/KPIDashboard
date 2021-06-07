@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users';
 import { Sprint } from 'src/app/models/sprint.model';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatSnackBar } from '@angular/material/snack-bar';
 interface SprintListFilter {
   label: string;
   value: number;
@@ -56,11 +57,15 @@ export class SprintManagementComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService, 
+  constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService,
+    private _snackBar: MatSnackBar, 
     private sprintService: SprintService, private projectService: ProjectService, 
     private authService: AuthenticationService, private userService: UsersService) {}
 
   ngOnInit(){
+    this._snackBar.open("Loading Dashboard...", "", {
+      duration: 3000
+    });
     this.sprintService.getAllSprintsByProjectId(this.authService.getLoggedUser().project_id).subscribe(data => {
       this.sprints = data;
       data.forEach(sprint => {
@@ -101,7 +106,9 @@ export class SprintManagementComponent {
         
        }
        this.changesPerSprint[0]= {addedTasks: totalChanges};
+       this._snackBar.dismiss();
      })
+     
   }
   
 
@@ -114,6 +121,9 @@ export class SprintManagementComponent {
   }
 
   exportAsPDF(id:string){
+    this._snackBar.open("Downloading PDF...", "", {
+      duration: 3000
+    });
     let data = document.getElementById(id);  
     html2canvas(data).then(canvas => {
       const contentDataURL = canvas.toDataURL('image/png')  
@@ -121,6 +131,8 @@ export class SprintManagementComponent {
       // let pdf = new jspdf('p', 'cm', 'a4'); 
       pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
       pdf.save('Sprint Management Dashboard.pdf');   
+      this._snackBar.dismiss();
     }); 
+    
   }
 }
