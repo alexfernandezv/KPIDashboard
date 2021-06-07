@@ -29,3 +29,8 @@
   top: 100px;
   right: 50px;
 }
+.back{
+  position: absolute;
+  top: 100px;
+  left: 50px;
+}
