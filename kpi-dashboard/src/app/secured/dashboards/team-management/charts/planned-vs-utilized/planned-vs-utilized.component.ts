@@ -28,8 +28,8 @@ export class PlannedVsUtilizedComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Planned hours', backgroundColor: "yellow" },
-    { data: [], label: 'Needed hours', backgroundColor: "#ff6384" }
+    { data: [], label: 'Planned hours' },
+    { data: [], label: 'Needed hours' }
   ];
   public chartReady : boolean = false;
   constructor(private usersService: UsersService, private authService: AuthenticationService) { }

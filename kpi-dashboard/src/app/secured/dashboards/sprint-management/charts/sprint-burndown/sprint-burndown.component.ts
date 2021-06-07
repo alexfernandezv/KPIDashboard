@@ -85,9 +85,7 @@ export class SprintBurndownComponent implements OnInit {
       this.lineChartData[1].data.push(data.totalTasks)
       this.lineChartData[1].data.push(data.totalTasks-data.totalTasks/3)
       this.lineChartData[1].data.push((data.totalTasks-data.totalTasks/3)-data.totalTasks/3)
-      this.lineChartData[1].data.push((data.totalTasks-data.totalTasks/3-data.totalTasks/3)-data.totalTasks/3)
-      
-      
+      this.lineChartData[1].data.push(0)
       this.chartReady = true;
       });
   }

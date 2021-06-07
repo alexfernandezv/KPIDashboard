@@ -292,5 +292,78 @@ exports.findChangesPerSprint= (req, res) => {
     });
 };
 
+exports.computeEfectiveness= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  var tasks = []
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var totalTasks = 0;
+      var leadTimeAux = 0;
+      var cycleTimeAux = 0;
+      var totalWorkedHours = 0;
+      var totalPlannedHours = 0;
+      data.forEach((sprint)=>{
+        sprint.tasks.forEach( task =>{
+          if(task.status == "Completed"){
+            totalTasks += 1;
+            leadTimeAux +=  Math.round((new Date(task.end_date) - new Date(task.creation_date)) /  3600000);
+            cycleTimeAux += Math.round((new Date(task.end_date) - new Date(task.start_date)) /  3600000);
+            totalWorkedHours += task.worked_hours;
+          }
+          totalPlannedHours += task.estimated_duration;
+        }
+      )
+    })
+    res.send({leadTime: Math.round(leadTimeAux/totalTasks), cycleTime: Math.round(cycleTimeAux/totalTasks), accomplishmentRatio:  Math.round((totalWorkedHours/totalPlannedHours)*100)})
+    });
+};
 
+exports.getBugData= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  var tasks = []
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var bugsReported = 0;
+      var bugsSolved = 0;
+      var bugFixTime = 0;
+      data.forEach((sprint)=>{
+        sprint.tasks.forEach( task =>{
+          if(task.type == "Bug"){
+            if(task.status == "Completed"){
+              bugFixTime += task.worked_hours;
+              bugsSolved += 1;
+            }
+            bugsReported += 1;
+          }
+        }
+      )
+    })
+    res.send({bugsReported: bugsReported, bugsSolved:  bugsSolved, bugFixTime: (bugFixTime/bugsSolved).toFixed(2)})
+    });
+};
 
+exports.findBugsPerSprint= (req, res) => {
+  const id = req.params.id;
+  var condition = id ? { Project_project_id: { [Op.like]: `%${id}%` } } : null;
+  Sprint.findAll({where: condition, include: ["tasks"] })
+    .then(data => {
+      var sprints ={};
+      data.forEach((sprint)=>{
+        var bugs = 0;
+        sprint.tasks.forEach((task)=>{
+          if(task.type == "Bug"){
+            bugs += 1;
+          }
+        })
+        sprints[sprint.sprint_id] = {bugs: bugs}
+      })
+      res.send(sprints)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error"
+      });
+    });
+};

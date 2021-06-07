@@ -2,63 +2,68 @@
 <div class="content">
   <h1>Dashboard Categories</h1>
   <h2>The KPIs have been grouped into different dashboards according to what they measure</h2>
-  <mat-grid-list cols="2" rowHeight="1.8:1">
+  <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
-        <mat-icon color="primary"  matTooltip="Set of metrics, indicators and graphs that represent the status of the Scrum Team, possible problems and also allow to monitor their activity on the sprints. Dedicated to the Scrum Master as well as to the Scrum Team, as they help to identify possible problems that directly affect the project development" matTooltipPosition="right">info</mat-icon>
-      <div>
-        <div class="container">
-          <a [routerLink]="['']">
-            <img class="image" src="assets/images/dashboard-example.png">
-            <div class="overlay">
-                <div class="text">SEE EXAMPLE</div>
-            </div>
-          </a>
-          <h1>Scrum Team Management</h1>
-        </div>
-      </div>
-      
+      <mat-card class="my-card" colspan="0.5">
+        <mat-card-header>
+          <div mat-card-avatar class="scrum-image"></div>
+          <mat-card-title>Scrum Team Management</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="card_content">
+            Set of metrics, indicators and graphs that represent the status of the Scrum Team, possible problems and also allow to monitor their activity on the sprints.
+            Dedicated to the Scrum Master as well as to the Scrum Team, as they help to identify possible problems that directly affect the project development.
+          </p>
+          <br/>
+          <button [routerLink]="['/dashboards/team-management']" class="go" mat-stroked-button color="primary">SEE DASHBOARD</button>
+        </mat-card-content>
+      </mat-card> 
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-icon color="primary" matTooltip="Set of indicators, metrics and graphs that represent the conditions that are possible for the different Sprints (for separate purposes and as a set of the project). Specifically dedicated to the Scrum Masters, so that they provide an overview at the time that specifies the direction of the current iteration and of the project" matTooltipPosition="right">info</mat-icon>
-      <div>
-        <div class="container">
-          <a [routerLink]="['']">
-            <img class="image" src="assets/images/dashboard-example.png">
-            <div class="overlay">
-                <div class="text">SEE EXAMPLE</div>
-            </div>
-          </a>
-          <h1>Sprint Management</h1>
-        </div>
-      </div>
+      <mat-card class="my-card" colspan="0.5">
+        <mat-card-header>
+          <div mat-card-avatar class="sprint-image"></div>
+          <mat-card-title>Sprint Management</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="card_content">
+            Set of indicators, metrics and graphs that represent the conditions that are possible for the different Sprints (for separate purposes and as a set of the project). Specifically dedicated to the Scrum Masters, so that they provide an overview at the time that specifies the direction of the current iteration and of the project.
+          </p>
+          <br/>
+          <button [routerLink]="['/dashboards/sprint-management']" class="go" mat-stroked-button color="primary">SEE DASHBOARD</button>
+        </mat-card-content>
+      </mat-card> 
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-icon color="primary" matTooltip="Set of indicators and metrics that measure the efficiency (in the business scope) of the Scrum Team. This set of KPIs is focused on the analysis of the benefits and the expenses in order to obtain a vision of whether the business objectives are complete. They are dedicated to the Scrum Master and the Product Owner, the ones who connect the business idea and try to maximize the values of all the processes involved" matTooltipPosition="right">info</mat-icon>
-      <div>
-        <div class="container">
-          <a [routerLink]="['']">
-            <img class="image" src="assets/images/dashboard-example.png">
-            <div class="overlay">
-                <div class="text">SEE EXAMPLE</div>
-            </div>
-          </a>
-          <h1>Efectiveness Management</h1>
-        </div>
-      </div>
+      <mat-card class="my-card" colspan="0.5">
+        <mat-card-header>
+          <div mat-card-avatar class="efectiveness-image"></div>
+          <mat-card-title>Efectiveness Management</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="card_content">
+            Set of indicators and metrics that measure the efficiency (in the business scope) of the Scrum Team. This set of KPIs is focused on the analysis of the benefits and the expenses in order to obtain a vision of whether the business objectives are complete.
+            <br/>Dedicated to the Scrum Master and the Product Owner.
+          </p>
+          <br/>
+          <button [routerLink]="['/dashboards/efectiveness-management']" class="go" mat-stroked-button color="primary" >SEE DASHBOARD</button>
+        </mat-card-content>
+      </mat-card> 
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-icon color="primary" matTooltip="Set of indicators and metrics focused on the appearance and management of the project bugs and defects. Dedicated to the Scrum Master or the Project Owner to see which are the critical activites, the defect typology and where it is produced.Will guide the team on how to correct and avoid them" matTooltipPosition="right">info</mat-icon>
-      <div>
-        <div class="container">
-          <a [routerLink]="['']">
-            <img class="image" src="assets/images/dashboard-example.png">
-            <div class="overlay">
-                <div class="text">SEE EXAMPLE</div>
-            </div>
-          </a>
-          <h1>Bug Management</h1>
-        </div>
-      </div>
+      <mat-card class="my-card" colspan="0.5">
+        <mat-card-header>
+          <div mat-card-avatar class="bug-image"></div>
+          <mat-card-title>Bug Management</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="card_content">
+            Set of indicators and metrics focused on the appearance and management of the project bugs and defects. Dedicated to the Scrum Master or the Project Owner to see which are the critical activites, the defect typology and where it is produced.Will guide the team on how to correct and avoid them.
+          </p>
+          <br/>
+          <button [routerLink]="['/dashboards/bug-management']" class="go" mat-stroked-button color="primary">SEE DASHBOARD</button>
+        </mat-card-content>
+      </mat-card> 
     </mat-grid-tile>
   </mat-grid-list> 
 </div>

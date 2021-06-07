@@ -8,7 +8,9 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { UsersService } from 'src/app/services/users';
 import { Sprint } from 'src/app/models/sprint.model';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import { MatSnackBar } from '@angular/material/snack-bar';
 interface SprintListFilter {
   label: string;
   value: number;
@@ -37,7 +39,6 @@ export class SprintManagementComponent {
   date2: FormControl;
   reloaded: boolean = false;
   changesPerSprint : any;
-  /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -56,11 +57,15 @@ export class SprintManagementComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService, 
+  constructor(private breakpointObserver: BreakpointObserver,private taskService: TaskService,
+    private _snackBar: MatSnackBar, 
     private sprintService: SprintService, private projectService: ProjectService, 
     private authService: AuthenticationService, private userService: UsersService) {}
 
   ngOnInit(){
+    this._snackBar.open("Loading Dashboard...", "", {
+      duration: 3000
+    });
     this.sprintService.getAllSprintsByProjectId(this.authService.getLoggedUser().project_id).subscribe(data => {
       this.sprints = data;
       data.forEach(sprint => {
@@ -75,19 +80,8 @@ export class SprintManagementComponent {
       let totalHoursWorked = 0;
       let totalHoursRemaining = 0;
       for( let v in data){
-        if(data[v].workedHours == 0){
-          this.workedAndRemainingHours[v].workedHours = "0";
-        }
-        else{
           totalHoursWorked += data[v].workedHours;
-        }
-
-        if(data[v].remainingHours == 0){
-          this.workedAndRemainingHours[v].remainingHours = "0";
-        }
-        else{
           totalHoursRemaining += data[v].remainingHours;
-        }
       }
       this.workedAndRemainingHours[0] = {workedHours: totalHoursWorked,remainingHours : totalHoursRemaining};
     })
@@ -96,19 +90,9 @@ export class SprintManagementComponent {
      let totalPlanned = 0;
      let totalCompleted = 0;
       for( let v in data){
-        if(data[v].totalTasks == 0){
-          this.taskInfo[v].totalTasks = "0";
-        }
-        else{
           totalPlanned += data[v].totalTasks;
-        }
-
-        if(data[v].completedTasks == 0){
-          this.taskInfo[v].completedTasks = "0";
-        }
-        else{
           totalCompleted += data[v].completedTasks;
-        }
+        
       }
       this.taskInfo[0]= {"totalTasks": totalPlanned, "completedTasks": totalCompleted};
       
@@ -117,16 +101,14 @@ export class SprintManagementComponent {
       this.changesPerSprint = data;
       let totalChanges = 0;
        for( let v in data){
-         if(data[v].addedTasks == 0){
-           this.changesPerSprint[v].addedTasks = "0";
-         }
-         else{
-          totalChanges += data[v].addedTasks;
-         }
-         
+    
+        totalChanges += data[v].addedTasks;
+        
        }
        this.changesPerSprint[0]= {addedTasks: totalChanges};
+       this._snackBar.dismiss();
      })
+     
   }
   
 
@@ -136,5 +118,21 @@ export class SprintManagementComponent {
     setTimeout(() => {
       this.reloaded = false;
     },1000)
+  }
+
+  exportAsPDF(id:string){
+    this._snackBar.open("Downloading PDF...", "", {
+      duration: 3000
+    });
+    let data = document.getElementById(id);  
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); 
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+      pdf.save('Sprint Management Dashboard.pdf');   
+      this._snackBar.dismiss();
+    }); 
+    
   }
 }

@@ -1,0 +1,13 @@
+<div style="display: block;">
+  <canvas baseChart *ngIf="chartReady; else loading"
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

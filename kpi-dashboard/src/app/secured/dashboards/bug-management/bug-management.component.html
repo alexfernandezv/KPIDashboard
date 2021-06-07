@@ -1,27 +1,47 @@
 <app-navbar></app-navbar>
 <div class="content">
-  <div class="grid-container">
-    <h1 class="mat-h1">Bug Management Dashboard</h1>
-    <mat-grid-list cols="2" rowHeight="350px">
-      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              {{card.title}}
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Expand</button>
-                <button mat-menu-item>Remove</button>
-              </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <div>Card Content Here</div>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>  
+  <div>
+    <div id="exportable" class="grid-container">
+      <h1 class="mat-h1">Bug Management Dashboard</h1>
+      <button mat-stroked-button class="export" color="primary" (click)="exportAsPDF('exportable');">Export as PDF</button>
+      <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">
+        <!--Mini Cards-->
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows"></mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card *ngIf="bugsReported; else not_loaded" title="Bugs reported" [value]="bugsReported" color="orange" icon="schedule"></app-mini-card>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card *ngIf="bugsSolved; else not_loaded" title="Bugs solved" [value]="bugsSolved" color="purple" icon="task"></app-mini-card>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows">
+          <app-mini-card *ngIf="bugFixTime; else not_loaded" title="Average bugfix time (in hours)" tooltip="Indicator that shows the average time it takes the team to correct a bug from the moment it is reported" [value]="bugFixTime" color="green" icon="task"></app-mini-card>
+          <ng-template #not_loaded><mat-spinner></mat-spinner></ng-template>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+        [rowspan]="( cardLayout | async )?.miniCard.rows"></mat-grid-tile>
+        <!--Charts-->
+        <mat-grid-tile  [colspan]="3"
+          [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Bugs per Sprint" tooltip="Indicator that allows us to know in which Sprint there were more defects reported by the team, it can serve as a guide in future projects">
+            <app-bugs-per-sprint></app-bugs-per-sprint>
+          </app-card>
+        </mat-grid-tile>
+        <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
+        [rowspan]="( cardLayout | async )?.chart.rows">
+          <app-card title="Bugs per role" tooltip="Total number of errors/bugs/incidents that have occurred throughout the project according to the type of role of the team that has managed it">
+            <app-bugs-per-role-pie></app-bugs-per-role-pie>
+          </app-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>  
+  </div>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

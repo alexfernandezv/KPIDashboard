@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 <div class="content">
   <div *ngIf="(project && members && taskCompletionRatio); else not_loaded">
-    <div class="grid-container">
+    <div id="exportable" class="grid-container">
       <h1 class="mat-h1">Scrum Team Management Dashboard</h1>
-      <button mat-stroked-button class="export" color="primary">Export</button>
+      <button mat-stroked-button class="export" color="primary" (click)="exportAsPDF('exportable');">Export as PDF</button>
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="150px">
         <!--Mini Cards-->
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Task completion ratio" [value]="taskCompletionRatio" color="black" icon="task" [percentage]="true"></app-mini-card>
+          <app-mini-card title="Task completion ratio" [value]="taskCompletionRatio" color="green" icon="task" [percentage]="true"></app-mini-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
@@ -16,36 +16,36 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Estimated hours" [value]="estimatedHours" color="black" icon="schedule"></app-mini-card>
+          <app-mini-card title="Estimated hours" [value]="estimatedHours" color="orange" icon="schedule"></app-mini-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
         [rowspan]="( cardLayout | async )?.miniCard.rows">
-          <app-mini-card title="Needed hours" [value]="neededHours" color="black" icon="hourglass_top"></app-mini-card>
+          <app-mini-card title="Needed hours" [value]="neededHours" color="red" icon="hourglass_top"></app-mini-card>
         </mat-grid-tile>
 
         
         <!--Charts-->
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
           [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Team Roles">
+          <app-card title="Team Roles" tooltip="Graphical representation of the Scrum Team members distributed according to their roles">
             <app-roles-chart></app-roles-chart>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Planned tasks vs Finished tasks  (per role)">
+          <app-card title="Planned tasks vs Finished tasks  (per role)" tooltip="Indicator of the tasks completed according to the role of the team members in relation to the planned tasks. It gives us an overview of how the tasks have been divided between the different roles, their workload and the pace of their work">
             <app-done-vs-planned></app-done-vs-planned>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Planned hours vs Needed hours  (per role)">
+          <app-card title="Planned hours vs Needed hours  (per role)" tooltip="Indicates the work required in hours to complete the tasks defined at the beginning of the project and how many are actually needed. It allows us to detect blistering collisions, bugs and inefficiencies on the part of the team or, on the contrary, a good organisation, efficiency and quality of the processes undertaken by the team">
             <app-planned-vs-utilized></app-planned-vs-utilized>
           </app-card>
         </mat-grid-tile>
         <mat-grid-tile  [colspan]="( cardLayout | async )?.chart.cols"
         [rowspan]="( cardLayout | async )?.chart.rows">
-          <app-card title="Bugs per role">
+          <app-card title="Bugs per role" tooltip="Total number of errors/bugs/incidents that have occurred throughout the project according to the type of role of the team that has managed it">
             <app-bugs-per-role></app-bugs-per-role>
           </app-card>
         </mat-grid-tile>

@@ -12,7 +12,9 @@ import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { Observable, Subject } from 'rxjs';
 import { UsersService } from 'src/app/services/users';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-team-management',
   templateUrl: './team-management.component.html',
@@ -53,9 +55,13 @@ export class TeamManagementComponent implements OnInit{
   );
 
   constructor(private breakpointObserver: BreakpointObserver, private taskService: TaskService, 
+    private _snackBar: MatSnackBar,
     private sprintService: SprintService, private projectService: ProjectService, private authService: AuthenticationService, private userService: UsersService) {}
 
   ngOnInit(){
+    this._snackBar.open("Loading Dashboard...", "", {
+      duration: 3000
+    });
     this.user = this.authService.getLoggedUser();
     this.projectId = this.user.project_id;
     this.projectService.getProjectById(this.projectId).subscribe(data => {
@@ -85,7 +91,21 @@ export class TeamManagementComponent implements OnInit{
     })
     this.projectService.getProjectRoles(this.projectId).subscribe(data => {
       this.roles = data.roles;
+      this._snackBar.dismiss();
     })
   }
- 
+  exportAsPDF(id:string){
+    this._snackBar.open("Downloading PDF...", "", {
+      duration: 3000
+    });
+    let data = document.getElementById(id);  
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); 
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+      pdf.save('Team Management Dashboard.pdf');  
+      this._snackBar.dismiss()
+    }); 
+  }
 }
