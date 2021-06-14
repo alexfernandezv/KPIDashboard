@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { InitialComponent } from './components/public/initial/initial.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NavbarComponent } from './navigation/navbar/navbar.component';
+import { NavbarComponent } from './components/navigation/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card'; 
