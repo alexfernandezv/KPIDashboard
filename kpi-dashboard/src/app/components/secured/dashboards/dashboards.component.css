@@ -28,18 +28,18 @@ mat-card:hover{
   background-color: wheat;
 }
 .scrum-image {
-  background-image: url('../../../assets/images/scrum-image.jpg');
+  background-image: url('../../../../assets/images/scrum-image.jpg');
   background-size: cover;
 }
 .sprint-image {
-  background-image: url('../../../assets/images/sprint-image.png');
+  background-image: url('../../../../assets/images/sprint-image.png');
   background-size: cover;
 }
 .efectiveness-image {
-  background-image: url('../../../assets/images/efectiveness-image.png');
+  background-image: url('../../../../assets/images/efectiveness-image.png');
   background-size: cover;
 }
 .bug-image {
-  background-image: url('../../../assets/images/bug-image.png');
+  background-image: url('../../../../assets/images/bug-image.png');
   background-size: cover;
 }
