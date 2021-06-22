@@ -49,7 +49,11 @@ export class EfectivenessManagementComponent {
     this.projectService.getProjectEfectiveness(this.authService.getLoggedUser().project_id).subscribe(data => {
       this.leadTime = data.leadTime;
       this.cycleTime = data.cycleTime;
-      this.accomplishmentRatio = data.accomplishmentRatio;
+      if(data.accomplishmentRatio >= 100)
+        this.accomplishmentRatio = 100;
+      else{
+        this.accomplishmentRatio = data.accomplishmentRatio;
+      }
       this._snackBar.dismiss();
     })
   }
